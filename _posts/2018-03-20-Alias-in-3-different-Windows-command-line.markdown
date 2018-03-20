@@ -14,12 +14,12 @@ category:  cheat sheet
 sudo vim ~/.bashrc
 ```
 
-## Git Bash
-找到`C:\\Program Files\\Git\\etc\\profile.d\\aliases.sh`  
+## Git Bash:
+找到`C:\Program Files\Git\etc\profile.d\aliases.sh`  
 
 admin mode 下編輯即可  
 (也可以用vs code編輯，權限不足他會幫你用系統管理員身分重試)  
-## Windows CMD
+## Windows CMD:
 最麻煩，只要一次性的話：  
 
 ```bash
