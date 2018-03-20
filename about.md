@@ -4,6 +4,6 @@ title: "About"
 description: "Who am I?"
 header-img: "img/home-bg.jpg"
 ---
-Hi! My name is Jexus Chuang, a student who major in electrical engineering inNational Taiwan University.
+Hi! My name is Jexus Chuang, a student who major in electrical engineering in National Taiwan University.
 I will share some notes or articles during my study. Thanks for reading and taking the time to comment :)
 	
