@@ -14,9 +14,9 @@ logo: img/logos/Project-Pages-New-Logo-Inverted.png
 
 # Tertiary Parameters
 github_username:  voidism
-project_repository: voidism
+project_repository: 
 disqus_shortname: jexus-markdown
-g-analytics: UA-75881392-1
+#g-analytics: UA-75881392-1
 altmetric: true
 
 # Build settings
@@ -41,7 +41,7 @@ defaults:
 # Prose Settings
 prose:
   ignore: ['feed.xml', '/stl', '/ply', '/js', '/plugin', '/lib', '/projectors', '_layouts', '/_includes', 'Gruntfile.js', 'package.json', 'proselinks.jsonp', 'ppanchor.matin', '.gitignore', '/search', '/css', '/img', 'favicon.png','_data/*.json','LICENSES.md','README.md','colorscheme.scss','members.html','mentions.html','index.html']
-  siteurl: 'http://projectpages.github.io/project-pages/'
+  siteurl: "https://voidism.github.io/"
   ispp: true
   media: 'img'
   metadata:

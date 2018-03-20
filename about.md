@@ -1,9 +1,9 @@
 ---
 layout: page
 title: "About"
-description: "Why use Project Pages?"
+description: "Who am I?"
 header-img: "img/home-bg.jpg"
 ---
-
-Project Pages is a research blog tool that allows you to quickly show your latest results to an advisor, collaborators or your mom.
+Hi! My name is Jexus Chuang, a student who major in electrical engineering inNational Taiwan University.
+I will share some notes or articles during my study. Thanks for reading and taking the time to comment :)
 	

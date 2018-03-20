@@ -9,6 +9,8 @@ category:  note
 
 ### Ch7: Building blocks of integrated-circuit amplifiers (7.1-7.6) 
 
+[Lecture PDF](http://cc.ee.ntu.edu.tw/~lhlu/eecourses/Electronics2/Electronics_Ch7.pdf)
+
 在學電子學一時，我們所用的設計想法都是以離散電路出發，也就是把各個元件放在麵包板上連接的概念。然而這章開始，我們需要改用積體電路的想法來設計電路。
 
 積體電路與離散電路有何差別呢？在晶圓上中製造一個大電阻的成本及空間使用很高，反而製造(在矽晶上摻雜)一個電晶體的成本已經很小很小很小，且空間也只占用幾奈米。
@@ -17,13 +19,13 @@ category:  note
 
 雖然這招順利的讓負載電阻變大，但如果這個放大器本身的輸出阻抗($R_{out}$)比負載電阻小很多，兩個一大一小並聯下去，還是會得到小的電阻，怎麼辦呢？
 
-如果我們單純想辦法放大放大器內部的$R_{out}$，可能會使電流($i_{sh}$)變小，放大倍率還是變小，得不償失，所以我們又把腦筋動到電晶體上，我們在原本的CS放大器上再接一個CG結構的電晶體(這招叫做cascode)，它的效果是current buffer，他不放大信號，但能把電流百分之百從input端拉到output端，同時他自己也有個AC電阻很大的ro，剛好可以把Rout放大，又是一舉兩得。
+如果我們單純想辦法放大放大器內部的$R_{out}$，可能會使電流($i_{sh}$)變小，放大倍率還是變小，得不償失，所以我們又把腦筋動到電晶體上，我們在原本的CS放大器上再接一個CG結構的電晶體(這招叫做cascode)，它的效果是current buffer，他不放大信號，但能把電流百分之百從input端拉到output端，同時他自己也有個AC電阻很大的$r_o$，剛好可以把$R_{out}$放大，又是一舉兩得。
 
 了解完AC信號放大的部分，我們還得知道DC偏壓要怎麼弄到適當的偏壓點，因此開始介紹current mirror結構。current mirror的目標是希望做出一個理想電流源，也就是一個圈圈中間一個箭頭的那個東西，但其實理想電流源的小${r_o}$是無限大，但current mirror不是，因此我們首先介紹 cascade current mirror 結構，讓${R_o}$增大。另外，BJT的β值不夠大時，參考電流 $I_{ref}$ 跟輸出電流 $I_o$ 的比例並不好拿捏(通常電晶體的β值是一個range，沒有確定值)，我們希望降低β值對輸出電流的影響，於是在BJT的current mirror中多加一個BJT，作為base current compensation的效果。
 
 再來，我們希望剛剛講的這兩件事(讓$R_o$增大、降低β值的影響)可以實現在同一個 current mirror 結構中，於是我們介紹Wilson current mirror結構，他雖然$R_o$會比 cascode current mirror 小二分之一(影響還好)，但β值的影響也一樣地有被降低。不過Wilson current mirror結構用在MOS就效果沒那麼顯著，因為MOS不會有β值的問題要解決，$R_o$也跟原本cascode的時候一樣，反而因為一邊有接兩個電晶體，一邊只有一個，會讓兩邊$V_{DS}$不同，所以我們又把第四顆電晶體放回去，結果這樣就跟原本cascode有87%像了。
 
-最後，我們介紹Widlar current source結構，為了輸出一個大小是比參考電流 I_ref 小很多倍的電流(可能百分之一)，但我們不可能做到兩顆電晶體channel的長度差是100倍，那樣太浪費空間。於是我們在current mirror的右下角多加一個電阻R_E，這樣 $I_{ref}$ 跟 $I_o$ 的比例便能由$R_E$來決定了，雖然$R_E$也不小就是，但設計IC就是不斷的compromise啊。
+最後，我們介紹Widlar current source結構，為了輸出一個大小是比參考電流 $I_{ref}$ 小很多倍的電流(可能百分之一)，但我們不可能做到兩顆電晶體channel的長度差是100倍，那樣太浪費空間。於是我們在current mirror的右下角多加一個電阻$R_E$，這樣 $I_{ref}$ 跟 $I_o$ 的比例便能由$R_E$來決定了，雖然$R_E$也不小就是，但設計IC就是不斷的compromise啊。
 
 ### Ch8: Differential and multistage amplifiers (8.1 - 8.6.1) 
 待續
