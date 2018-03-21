@@ -1,8 +1,8 @@
 ---
 layout:     post
-title:      電子學筆記
+title:      電子學筆記 - Microelectronic Circuits - Course Notes
 author:     Jexus
-tags: 		Electronics Microelectronic circuits
+tags: 		Electronics Microelectronic_Circuits
 subtitle:   呂良鴻 - 電子學二
 category:  note
 ---
