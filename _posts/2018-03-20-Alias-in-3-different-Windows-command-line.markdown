@@ -9,7 +9,7 @@ category:  cheat sheet
 
 
 ## Ubuntu Bash on Windows:
-最快，直接編輯
+最快，直接編輯，跟linux一樣
 ```bash
 sudo vim ~/.bashrc
 ```
