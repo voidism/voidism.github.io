@@ -28,13 +28,13 @@ category:  note
 
 ![slide_02](https://i.imgur.com/YiLiPK2.jpg)
 
-![slide_03](https://i.imgur.com/s1kuVoZ.jpg)
+# ![slide_03](https://i.imgur.com/s1kuVoZ.jpg)
 
 ![slide_04](https://i.imgur.com/UUzZXah.jpg)
 
 - 當年他在讀台大電機，國際半導體雜誌出刊台灣要等三個月才看得到，系上只有電機一館，很窮，就這樣過來的，大家都努力出國
-- 1975年，身上只有兩千塊美金就到了stanford
-- 考試不及格要被取消獎學金，因而參透了西方人的演繹法
+- 1975年，身上只有兩千塊美金就到了Stanford
+- 在Stanford考試不及格，差點要被取消獎學金，因而參透了西方人的演繹法
 - 中國人習慣用歸納法，做生物學也是，但他發現他的猶太人老闆思考方式是演繹法
 - 伯樂挑千里馬，千里馬實際上是瘦馬，當年的silicon就是瘦馬(當時大家多用鍺做半導體，沒想過矽今天會是千里馬)
 - 半導體就像幹細胞，工程師如果只懂software，東西很容易被抄；如果只懂IC design，無法把電路的效能發揮到最大
