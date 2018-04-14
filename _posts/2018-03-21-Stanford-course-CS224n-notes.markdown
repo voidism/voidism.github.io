@@ -15,6 +15,7 @@ Suggested Readings:
 [Linear Algebra Review](http://web.stanford.edu/class/cs224n/readings/cs229-linalg.pdf)  
 [Probability Review](http://web.stanford.edu/class/cs224n/readings/cs229-prob.pdf)  
 [Convex Optimization Review](http://web.stanford.edu/class/cs224n/readings/cs229-cvxopt.pdf)  
-[More Optimization (SGD) Review](http://cs231n.github.io/optimization-1/)  
+[More Optimization (SGD) Review](http://cs231n.github.io/optimization-1/) 
+第一堂課就是很top down方式的課程介紹，讓你大概了解整個NLP領域的Big picture。 
 
 待補...

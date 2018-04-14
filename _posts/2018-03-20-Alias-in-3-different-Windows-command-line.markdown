@@ -2,7 +2,7 @@
 layout:     post
 title:      Alias in 3 different Command line & Bash on Windows
 author:     Jexus
-tags: 		Git
+tags: 		Git Windows 
 subtitle:   在 Windows 環境下的三種 Bash|CMD 設置 Alias 的方法
 category:  cheat sheet
 ---

@@ -1,9 +1,9 @@
 ---
 layout:     post
-title:      電子學筆記 - Microelectronic Circuits - Course Notes
+title:      Microelectronic Circuits - Course Notes
 author:     Jexus
 tags: 		Electronics Microelectronic_Circuits
-subtitle:   呂良鴻 - 電子學二
+subtitle:   電子學筆記 - 呂良鴻<電子學二>
 category:  note
 ---
 
@@ -39,7 +39,11 @@ category:  note
 $CMRR = |\frac{A_d}{A_{cm}}|$)，CMRR在理想上是無限大，因為${A_{cm}}$是$0$，但實際上當然不可能這麼好，為什麼呢? 因為剛剛都是假設兩個放大器完全一模一樣的時候，common mode信號輸入才能完全被放大一模一樣的倍率，在output端common mode的輸出才會兩端無電位差，因此${A_d}$等於零。然而實際上在製造積體電路時，兩個放大器還是不太可能完全一樣，一定有一些極細微的差異(稱為mismatch)。這些差異(mismatch)分為兩種，第一種是兩個放大器的負載電阻值不一樣，我們先假設一邊是$R_D$一邊是$R_D+\Delta R_D$好了(通常$\Delta R_D$會在$R_D$的$\frac{1}{100}$以內)，對於common mode信號來說，common mode信號的增益是 $A_{cm} \approx \frac{R_D}{2R_{SS}}(\frac{\Delta R_D}{R_D})$，這個值原本應該要是零的，而這對於CMRR的影響會使$CMRR = |\frac{A_d}{A_{cm}}| = |\frac{2g_mR_{SS}}{\Delta R_D/R_D}|$，因此CMRR就不再是無限大了。不過對於differential信號來說，這樣的mismatch對它影響還好喔，它兩邊輸出的電壓差會是$v_{od}=g_mR_D(1+\frac{\Delta R_D}{2R_D})v_{id}$，因為旁邊有一個大的1，而誤差項不到百分之一，所以通常可以忽略。第二種mismatch是電晶體的mismatch，也就是電晶體的$g_m$不一樣，我們先假設$g_{m1} = g_m + \frac{\Delta g_m}{2}$，$g_{m2} = g_m - \frac{\Delta g_m}{2}$，那麼這樣一算下來，$A_{cm} \approx \frac{R_D}{2R_{SS}}(\frac{\Delta g_m}{g_m})$(跟剛剛長得很像吧)，而$CMRR = |\frac{A_d}{A_{cm}}| = |\frac{2g_mR_{SS}}{\Delta g_m/g_m}|$(也是把剛剛的$R_D$換成$g_m$而已)。
 
 剛剛忘記先說，以上講的狀況都是MOS，如果是BJT，原則上是87%像，但還是有一些不一樣喔。哪裡不一樣咧? 首先因為BJT的Collector端電流只有Emitter端的$\alpha$倍，因此在輸入信號兩邊都是DC的$V_{CM}$時，輸出信號$v_{c1} = V_{CC} - \alpha IR_C$，會跟MOS差一個$\alpha$。
-再來，來看一下當輸入信號兩邊也還是DC，但是是差信號的話會怎樣。因為BJT的大信號電流公式是exponential的(MOS是二次式)，變化比較劇烈，我們算出來$i_{E1}=\dfrac {I}{1+e^{-v_{id}/V_{T}}}$，
+再來，來看一下當輸入信號兩邊也還是DC，但是是差信號的話會怎樣。因為BJT的大信號電流公式是exponential的(MOS是二次式)，變化比較劇烈，我們算出來$i_{E1}=\dfrac {I}{1+e^{-v_{id}/V_{T}}}$，而另一顆BJT的Emitter電流則對稱$i_{E2}=\dfrac {I}{1+e^{v_{id}/V_{T}}}$，我們把這兩個公式畫在圖上，橫軸放$\dfrac {v_{id}}{V_{T}}$，縱軸放$\dfrac {i_{E}}{I}$，我們注意到，當$\dfrac {v_{id}}{V_{T}} = 0$時，兩顆BTJ剛好一人分到一半電流I，而在$\dfrac {v_{id}}{V_{T}} = \pm 4$時，就已經讓其中一顆BJT拿到全部電流，另一顆幾乎沒電流，因此畫出來的曲線在0附近變化很陡峭，比MOS陡峭很多(因為BJT公式是exponential，MOS是二次式)，也就是當我們輸入小信號時，會有很大的增益啦。不過這個小信號要控制在$\dfrac {V_{T}}{2}$以下喔，不然會跑出這條陡峭曲線的線性範圍，於是就失真了。
+
+接下來我們就真的來看看小信號輸入會變怎樣，我們將剛剛那個很醜的exponential公式做近似(因為${v_{id}}$很小)，
+
+
 
 ...
 
