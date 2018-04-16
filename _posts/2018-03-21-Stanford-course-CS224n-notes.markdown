@@ -21,8 +21,8 @@ category:  note
 NLP著重在Syntactic analysis和Sementic Interpretation的部分。  
 人類的語言是很奇怪的東西，他是discrete/symbolic/categorical的signal system。  
 但科學家相信語言在人腦中encoding時是continuous pattern of activation，  
-而語言傳播時也是透過continuous的信號，語言的sparsity對機器學習來說是個問題，  
-2014年提出的word2vec也許是這個問題的解法，讓語言也能用continuous的方式在deep neural network中做optmization。Deep learning在speech recognition和computer vision中，都已經有了突破性的進展，但NLP還是很爛。  
+而語言傳播時也是透過continuous的信號，語言的sparsity對機器學習來說是個問題。  
+2014年提出的word2vec也許是這個問題的解法，讓語言也能用continuous的方式在deep neural network中做optmization，下一堂課就會介紹word2vec。Deep learning在speech recognition和computer vision中，都已經有了突破性的進展，但NLP還是很爛。  
 
 Applications:
 - Sentiment Analysis -> 透過RecursiveNN
