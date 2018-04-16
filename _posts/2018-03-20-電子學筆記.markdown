@@ -42,7 +42,7 @@ $CMRR = |\frac{A_d}{A_{cm}}|$)，CMRR在理想上是無限大，因為${A_{cm}}$
 再來，來看一下當輸入信號兩邊也還是DC，但是是差信號的話會怎樣。因為BJT的大信號電流公式是exponential的(MOS是二次式)，變化比較劇烈，我們算出來$i_{E1}=\dfrac {I}{1+e^{-v_{id}/V_{T}}}$，而另一顆BJT的Emitter電流則對稱$i_{E2}=\dfrac {I}{1+e^{v_{id}/V_{T}}}$，我們把這兩個公式畫在圖上，橫軸放$\dfrac {v_{id}}{V_{T}}$，縱軸放$\dfrac {i_{E}}{I}$，我們注意到，當$\dfrac {v_{id}}{V_{T}} = 0$時，兩顆BTJ剛好一人分到一半電流I，而在$\dfrac {v_{id}}{V_{T}} = \pm 4$時，就已經讓其中一顆BJT拿到全部電流，另一顆幾乎沒電流，因此畫出來的曲線在0附近變化很陡峭，比MOS陡峭很多(因為BJT公式是exponential，MOS是二次式)，也就是當我們輸入小信號時，會有很大的增益啦。不過這個小信號要控制在$\dfrac {V_{T}}{2}$以下喔，不然會跑出這條陡峭曲線的線性範圍，於是就失真了。
 
 接下來我們就真的來看看小信號輸入會變怎樣，我們將剛剛那個很醜的exponential公式做近似(因為${v_{id}}$很小)，結果得到：$i_{C1} = \dfrac {\alpha I}{2} - \dfrac {\alpha I}{2V_T}\dfrac {v_{id}}{2}$
-，其實這就跟MOS的公式87%像：$i_{D1} = \dfrac {I}{2} - \dfrac {I}{2V_{OV}}\dfrac {v_{id}}{2}$，可以看到BJT除了比MOS乘上$\alpha$倍以外，等於是用了$V_T$去取代$V_{OV}/2$。而如果不看共有的電流，只看增加的電流(也就是小信號)，得到$i_{c} = \dfrac {\alpha I}{2V_T}\dfrac {v_{id}}{2}$，剛好$g_m = I_C/V_T$，因此$i_{c} = g_m\dfrac {v_{id}}{2}$。
+，其實這就跟MOS的公式87%像：$i_{D1} = \dfrac {I}{2} - \dfrac {I}{V_{OV}}\dfrac {v_{id}}{2}$，可以看到BJT除了比MOS乘上$\alpha$倍以外，等於是用了$V_T$去取代$V_{OV}/2$。而如果不看共有的電流，只看增加的電流(也就是小信號)，得到$i_{c} = \dfrac {\alpha I}{2V_T}\dfrac {v_{id}}{2}$，剛好$g_m = I_C/V_T$，因此$i_{c} = g_m\dfrac {v_{id}}{2}$。
 
 其實我們還有一個更有用的看法，先假設$R_{EE} \gg r_e$，因此$v_{id}$就是跨在$2r_e$上，因此$i_c = \alpha i_e = \frac{\alpha v_{id}}{2r_e}$，其中$r_e = V_T/I_E = \frac{V_T}{I/2}$，可得$i_c = \alpha i_e = \frac{\alpha v_{id}}{2r_e} = g_m \frac{v_{id}}{2}$，是不是跟剛剛一模一樣呢?
 

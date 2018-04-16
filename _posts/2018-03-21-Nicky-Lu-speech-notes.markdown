@@ -70,12 +70,22 @@ category:  note
 - 將analog chip、memory...等不同功能的chip，全部放在同一個封裝內。
 - 不造平房，造整合式信義計畫區
 - 鈺創還做=> 不封裝的memory，接線外漏，就像電扶梯般
-- Steve Jobs用了他們未封裝的IC
-- 
+- Steve Jobs用了他們未封裝的IC  
+
 ![slide_10](https://i.imgur.com/rrtqNQH.jpg)
 
 ![slide_11](https://i.imgur.com/qofZ0cP.jpg)
 
-![slide_12]()
+### 3D Bare
+- 三星做堆疊高樓
+- 台積電做公寓 => 勝!
+
+![slide_12](https://i.imgur.com/gKREd5r.jpg)
+
+![slide_13](https://i.imgur.com/ToiMK1J.jpg)
+
+![slide_14](https://i.imgur.com/90rKmr6.jpg)
+
+- 當年回台創業，下飛機跟著200個工程師，小牛不識虎
 
 待續...
