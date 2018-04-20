@@ -36,7 +36,7 @@ category:  note
 但實際上的運作方法當然不只這樣，差動放大器的基本結構是把兩個CS放大器的接地端接到同一個電流源上，也就是說，各自兩個放大器通過的總電流是固定的，如此一來，如果放大器A拿了很多電流，放大器B就只能拿少少的電流，反之亦然。那麼可以想像一下，如果兩個放大器的輸入訊號完全相同，那麼他們各自的通過電流也會一模一樣，因為完全是對稱的，剛好每個放大器分到總電流的二分之一，剛好在這個情況底下，訊號的增益是小的，而如果兩個放大器的輸入訊號差異較大，訊號的增益會是大的。而我們其實可以把兩個不同輸入信號的組合，拆分成同樣共有的輸入(稱為common mode)，跟他們的信號差值(differential)，common mode其實就是這兩個信號的平均值，differential就是扣掉平均值之後剩下的東西。因為電路是一個線性系統，所以我們乾脆就把common mode跟differential分開兩次討論，計算之後再把結果加起來就好啦，這樣的效果會是一模一樣的(根據疊加原理)。所以囉，common mode因為是完全一樣的訊號，訊號的增益會很小(理想上是零)，反之differential的增益就很大，如此一來就完全達到我們想要得到的效果了，真的很棒吧。
 
 為了清楚了解common mode信號跟differential信號各自被放大的比例差異，我們定義了一個東西叫做CMRR(Common-mode rejection ratio)，他就等於differential信號的增益除以common mode信號的增益(
-$CMRR = |\frac{A_d}{A_{cm}}|$)，CMRR在理想上是無限大，因為${A_{cm}}$是$0$，但實際上當然不可能這麼好，為什麼呢? 因為剛剛都是假設兩個放大器完全一模一樣的時候，common mode信號輸入才能完全被放大一模一樣的倍率，在output端common mode的輸出才會兩端無電位差，因此${A_d}$等於零。然而實際上在製造積體電路時，兩個放大器還是不太可能完全一樣，一定有一些極細微的差異(稱為mismatch)。這些差異(mismatch)分為兩種，第一種是兩個放大器的負載電阻值不一樣，我們先假設一邊是$R_D$一邊是$R_D+\Delta R_D$好了(通常$\Delta R_D$會在$R_D$的$\frac{1}{100}$以內)，對於common mode信號來說，common mode信號的增益是 $A_{cm} \approx \frac{R_D}{2R_{SS}}(\frac{\Delta R_D}{R_D})$，這個值原本應該要是零的，而這對於CMRR的影響會使$CMRR = |\frac{A_d}{A_{cm}}| = |\frac{2g_mR_{SS}}{\Delta R_D/R_D}|$，因此CMRR就不再是無限大了。不過對於differential信號來說，這樣的mismatch對它影響還好喔，它兩邊輸出的電壓差會是$v_{od}=g_mR_D(1+\frac{\Delta R_D}{2R_D})v_{id}$，因為旁邊有一個大的1，而誤差項不到百分之一，所以通常可以忽略。第二種mismatch是電晶體的mismatch，也就是電晶體的$g_m$不一樣，我們先假設$g_{m1} = g_m + \frac{\Delta g_m}{2}$，$g_{m2} = g_m - \frac{\Delta g_m}{2}$，那麼這樣一算下來，$A_{cm} \approx \frac{R_D}{2R_{SS}}(\frac{\Delta g_m}{g_m})$(跟剛剛長得很像吧)，而$CMRR = |\frac{A_d}{A_{cm}}| = |\frac{2g_mR_{SS}}{\Delta g_m/g_m}|$(也是把剛剛的$R_D$換成$g_m$而已)。
+$CMRR = |\frac{A_d}{A_{cm}}|$)，CMRR在理想上是無限大，因為${A_{cm}}$是$0$，但實際上當然不可能這麼好，為什麼呢? 因為剛剛都是假設兩個放大器完全一模一樣的時候，common mode信號輸入才能完全被放大一模一樣的倍率，在output端common mode的輸出才會兩端無電位差，因此${A_{cm}}$等於零。然而實際上在製造積體電路時，兩個放大器還是不太可能完全一樣，一定有一些極細微的差異(稱為mismatch)。這些差異(mismatch)分為兩種，第一種是兩個放大器的負載電阻值不一樣，我們先假設一邊是$R_D$一邊是$R_D+\Delta R_D$好了(通常$\Delta R_D$會在$R_D$的$\frac{1}{100}$以內)，對於common mode信號來說，common mode信號的增益是 $A_{cm} \approx \frac{R_D}{2R_{SS}}(\frac{\Delta R_D}{R_D})$，這個值原本應該要是零的，而這對於CMRR的影響會使$CMRR = |\frac{A_d}{A_{cm}}| = |\frac{2g_mR_{SS}}{\Delta R_D/R_D}|$，因此CMRR就不再是無限大了。不過對於differential信號來說，這樣的mismatch對它影響還好喔，它兩邊輸出的電壓差會是$v_{od}=g_mR_D(1+\frac{\Delta R_D}{2R_D})v_{id}$，因為旁邊有一個大的1，而誤差項不到百分之一，所以通常可以忽略。第二種mismatch是電晶體的mismatch，也就是電晶體的$g_m$不一樣，我們先假設$g_{m1} = g_m + \frac{\Delta g_m}{2}$，$g_{m2} = g_m - \frac{\Delta g_m}{2}$，那麼這樣一算下來，$A_{cm} \approx \frac{R_D}{2R_{SS}}(\frac{\Delta g_m}{g_m})$(跟剛剛長得很像吧)，而$CMRR = |\frac{A_d}{A_{cm}}| = |\frac{2g_mR_{SS}}{\Delta g_m/g_m}|$(也是把剛剛的$R_D$換成$g_m$而已)。
 
 剛剛忘記先說，以上講的狀況都是MOS，如果是BJT，原則上是87%像，但還是有一些不一樣喔。哪裡不一樣咧? 首先因為BJT的Collector端電流只有Emitter端的$\alpha$倍，因此在輸入信號兩邊都是DC的$V_{CM}$時，輸出信號$v_{c1} = V_{CC} - \alpha IR_C$，會跟MOS差一個$\alpha$。
 再來，來看一下當輸入信號兩邊也還是DC，但是是差信號的話會怎樣。因為BJT的大信號電流公式是exponential的(MOS是二次式)，變化比較劇烈，我們算出來$i_{E1}=\dfrac {I}{1+e^{-v_{id}/V_{T}}}$，而另一顆BJT的Emitter電流則對稱$i_{E2}=\dfrac {I}{1+e^{v_{id}/V_{T}}}$，我們把這兩個公式畫在圖上，橫軸放$\dfrac {v_{id}}{V_{T}}$，縱軸放$\dfrac {i_{E}}{I}$，我們注意到，當$\dfrac {v_{id}}{V_{T}} = 0$時，兩顆BTJ剛好一人分到一半電流I，而在$\dfrac {v_{id}}{V_{T}} = \pm 4$時，就已經讓其中一顆BJT拿到全部電流，另一顆幾乎沒電流，因此畫出來的曲線在0附近變化很陡峭，比MOS陡峭很多(因為BJT公式是exponential，MOS是二次式)，也就是當我們輸入小信號時，會有很大的增益啦。不過這個小信號要控制在$\dfrac {V_{T}}{2}$以下喔，不然會跑出這條陡峭曲線的線性範圍，於是就失真了。
@@ -48,7 +48,20 @@ $CMRR = |\frac{A_d}{A_{cm}}|$)，CMRR在理想上是無限大，因為${A_{cm}}$
 
 剛剛導出的這個結果，在我們加上Degenerator電阻時非常好用，因為就只是把$r_e$變成$r_e+R_E$，所以$i_{e} = \dfrac {v_{id}}{2r_e+2R_e}$。
 
-原本在MOS中，輸入電阻是無限大，但現在因為是BJT，所以我們要考慮它輸入differential信號時的電阻$R_{id}$
+原本在MOS中，輸入電阻是無限大，但現在因為是BJT，所以我們要考慮它輸入differential信號時的電阻$R_{id}$，$R_{id}$基本上就是兩個$r_{e}$並聯，但因為在$r_{e}$那一端電流是input端的$\beta +1$倍，所以$R_{id}=(\beta +1)2r_{e}$，同樣地，如果有加上Degenerator電阻，則$R_{id}=(\beta +1)(2r_{e}+2R_{E})$。
+
+再來我們來看BJT的differential增益，雖然剛剛我們說BJT在Collector端的電流只有$\alpha$倍，不過當我們表示增益時會用$g_m$，而$\alpha$已經被包括在$g_m$裡面了，所以增益仍然是$A_d = g_mR_C$(MOS是$A_d = g_mR_D$)。不過，如果有加上Degenerator電阻，就被打回原形了，要表示成$A_{d} = \dfrac {\alpha (2R_{C})}{2r_e+2R_e} = \dfrac {\alpha R_{C}}{r_e+R_e}$，其實就是output電阻除以input電阻後乘上$\alpha$倍啦。而BJT也有mismatch的狀況，跟MOS一樣就不再多談，但這邊我們只先講$R_C$的mismatch，$\Delta R_C$會造成common mode信號的增益是 $A_{cm} \approx \frac{R_C}{2R_{EE}}(\frac{\Delta R_C}{R_C})$，而這對於CMRR的影響會使$CMRR = \frac{A_d}{A_{cm}} = \frac{2g_mR_{EE}}{\Delta R_C/R_C}$。
+
+講了這麼多mismatch的狀況，讓我們感覺這個誤差值很難評估大小，因此我們打算做一件事：把這些誤差的來源全部算到input信號的頭上！也就是說我們把這些誤差當成是input信號有一個偏差值，然後就假裝所有的mismatch都是好的，只是input信號的問題。蛤？為什麼要這樣冤枉人家？因為這樣有一個很大的好處，就是算出這個input"假偏差"電壓之後，我們就可以知道，如果你想讓你的input信號有用，就一定要大於這個"假偏差"電壓，不然就會被這個"假偏差"電壓蓋過去喔。
+
+因此，我們定義$V_{OS} = V_O/A_d$，對於MOS來說，針對$R_D$的偏差，我們算出$V_{OS} = (\frac {V_{OV}}{2})(\frac{\Delta R_D}{R_D})$；針對$(W/L)$的偏差，我們算出$V_{OS} = (\frac {V_{OV}}{2})(\frac{\Delta (W/L)}{(W/L)})$；針對$V_t$的偏差則會直接影響到$V_{OV}$，結果很簡單，我們算出$V_{OS} = \Delta V_t$。由於這三種因素是independent，total的$V_{OS}$可以估計成$V_{OS} = \sqrt {(\frac {V_{OV}}{2} \frac{\Delta (W/L)}{(W/L)})^2 + (\frac {V_{OV}}{2}\frac{\Delta (W/L)}{(W/L)})^2 + (\Delta V_t)^2}$。
+
+再來，BJT也要重複一次，這次不囉嗦，先講結論：把所有的$\frac {V_{OV}}{2}$換成$V_T$。針對$R_C$的偏差，我們算出$V_{OS} = V_T(\frac{\Delta R_D}{R_D})$；針對$(W/L)$的偏差，我們則直接看接面面積所造成的比例電流$I_S$的偏差，可得$V_{OS} = V_T(\frac{\Delta I_S}{I_S})$；至於$V_t$？抱歉，BJT根本沒有$V_t$，MOS的$V_t$的偏差是會直接影響到$V_{OV}$，但BJT的$V_{OV}$都用$V_T$來取代了，而$V_{T}$基本上是只受溫度影響，所以不會有mismatch的狀況啦。
+
+所以BJT total的$V_{OS}$可以估計成$V_{OS} = \sqrt {( V_T \frac{\Delta (W/L)}{(W/L)})^2 + (V_T \frac{\Delta (W/L)}{(W/L)})^2 }$。
+
+
+
 
 
 
