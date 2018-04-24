@@ -54,13 +54,21 @@ $CMRR = |\frac{A_d}{A_{cm}}|$)，CMRR在理想上是無限大，因為${A_{cm}}$
 
 講了這麼多mismatch的狀況，讓我們感覺這個誤差值很難評估大小，因此我們打算做一件事：把這些誤差的來源全部算到input信號的頭上！也就是說我們把這些誤差當成是input信號有一個偏差值，然後就假裝所有的mismatch都是好的，只是input信號的問題。蛤？為什麼要這樣冤枉人家？因為這樣有一個很大的好處，就是算出這個input"假偏差"電壓之後，我們就可以知道，如果你想讓你的input信號有用，就一定要大於這個"假偏差"電壓，不然就會被這個"假偏差"電壓蓋過去喔。
 
-因此，我們定義$V_{OS} = V_O/A_d$，對於MOS來說，針對$R_D$的偏差，我們算出$V_{OS} = (\frac {V_{OV}}{2})(\frac{\Delta R_D}{R_D})$；針對$(W/L)$的偏差，我們算出$V_{OS} = (\frac {V_{OV}}{2})(\frac{\Delta (W/L)}{(W/L)})$；針對$V_t$的偏差則會直接影響到$V_{OV}$，結果很簡單，我們算出$V_{OS} = \Delta V_t$。由於這三種因素是independent，total的$V_{OS}$可以估計成$V_{OS} = \sqrt {(\frac {V_{OV}}{2} \frac{\Delta (W/L)}{(W/L)})^2 + (\frac {V_{OV}}{2}\frac{\Delta (W/L)}{(W/L)})^2 + (\Delta V_t)^2}$。
+因此，我們定義input offset voltage$V_{OS} = V_O/A_d$，對於MOS來說，針對$R_D$的偏差，我們算出$V_{OS} = (\frac {V_{OV}}{2})(\frac{\Delta R_D}{R_D})$；針對$(W/L)$的偏差，我們算出$V_{OS} = (\frac {V_{OV}}{2})(\frac{\Delta (W/L)}{(W/L)})$；針對$V_t$的偏差則會直接影響到$V_{OV}$，結果很簡單，我們算出$V_{OS} = \Delta V_t$。由於這三種因素是independent，total的$V_{OS}$可以估計成$V_{OS} = \sqrt {(\frac {V_{OV}}{2} \frac{\Delta R_D}{R_D})^2 + (\frac {V_{OV}}{2}\frac{\Delta (W/L)}{(W/L)})^2 + (\Delta V_t)^2}$。
 
 再來，BJT也要重複一次，這次不囉嗦，先講結論：把所有的$\frac {V_{OV}}{2}$換成$V_T$。針對$R_C$的偏差，我們算出$V_{OS} = V_T(\frac{\Delta R_D}{R_D})$；針對$(W/L)$的偏差，我們則直接看接面面積所造成的比例電流$I_S$的偏差，可得$V_{OS} = V_T(\frac{\Delta I_S}{I_S})$；至於$V_t$？抱歉，BJT根本沒有$V_t$，MOS的$V_t$的偏差是會直接影響到$V_{OV}$，但BJT的$V_{OV}$都用$V_T$來取代了，而$V_{T}$基本上是只受溫度影響，所以不會有mismatch的狀況啦。
 
-所以BJT total的$V_{OS}$可以估計成$V_{OS} = \sqrt {( V_T \frac{\Delta (W/L)}{(W/L)})^2 + (V_T \frac{\Delta (W/L)}{(W/L)})^2 }$。
+所以BJT total的$V_{OS}$可以估計成$V_{OS} = \sqrt {( V_T \frac{\Delta R_D}{R_D})^2 + (V_T \frac{\Delta (W/L)}{(W/L)})^2 }$。
 
+其實BJT還有一項東西也會mismatch，不過前面都沒提到，也就是 $ \beta$，但 $ \beta$所影響的是電流喔，他的mismatch會造成差動放大器兩邊的偏壓電流不一樣大，跟input offset voltage一樣，我們用input offset current來看待他，我們算出input offset current$I_{OS}=I_B(\frac{\Delta \beta}{\beta})$
 
+再來，其實我們放大器最後一級的output很多都是需要單端對地的輸出，因此這時候我們就只能用到differential amp的其中一端直接接出來當output了，不過這樣另外半邊的放大就沒有用了，真的很虧，聰明的工程師想到一招，我們把放大器沒用到的那一邊的電流，透過current mirror，等效地換個方向直接灌到要輸出的那一邊，對於common mode信號來說，因為灌進去的電流跟原本就存在的電流是同方向同大小的，如果匹配的話，就不會有任何電流輸出到下一級電路了；對於differential信號來說，因為灌進去的電流跟原本就存在的電流是相反方向同大小的，所以加起來就變成兩倍了，原本另外半邊用不到的電流就可以被利用乾淨了，很聰明吧。
+
+這種結構我們稱之為Active Load differential amp，現在我們又重新算一次$G_m$和$R_O$了，不過不緊張，算出來$G_m = g_m$，$R_O = r_{o2} \Vert r_{o4}$，結果非常直觀，因此$A_d = g_m(r_{o2} \Vert r_{o4})$。
+
+現在common mode的增益就不是0了，我們想知道對於common mode的$G_m$值是多少，稱作$G_{mcm}$(在前一節是不需要討論這個的)，我們用類似半電路的方式來看他，忽略電晶體上的小電阻$\frac{1}{g_m}$之後，整條電路上就只剩下$2R_{SS}$，因此$G_{mcm} = \frac {1}{2R_{SS}}$，看單一半電路的$R_O$為 $2R_{SS}+r_{o}+(g_mr_o)(2R_{SS})$。
+
+現在要求$A_{cm}$，由於左半電路的$v_g$跟$v_d$是接在一起的，上面的電晶體就可以視為$\frac{1}{g_m}$的小電阻，$v_d$可算出$- G_{mcm}v_{icm}(R_o \Vert r_{o3} \Vert 1/g_{m3})$，由於$A_{cm}$是個蠻小的數字，所以我們先不能亂省東西，
 
 
 
