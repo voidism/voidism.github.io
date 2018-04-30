@@ -3,7 +3,7 @@ layout:     post
 title:      Enabling Artificial Intelligence at The Edge
 author:     Jexus
 tags: 		Speech Artificial_Intelligence Edge_Computing
-subtitle:   2018/04/30 intelliGo意騰科技CTO - 演講速記
+subtitle:   2018/04/30 intelliGo意騰科技CTO 邊緣運算 - 演講速記
 category:  note
 ---
 
