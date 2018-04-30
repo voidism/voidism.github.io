@@ -124,9 +124,9 @@ AI chip => 小量多樣 多功能
 
 ### 有意思的一段話：
 
-<center>SW is eating the world.</center>
-<center>AI is eating SW.</center>
-<center>EE is bringing AI up and up.</center>
+<center><i>SW is eating the world.</i></center>
+<center><i>AI is eating SW.</i></center>
+<center><i>EE is bringing AI up and up.</i></center>
 
 
 ## Energe Efficiency
