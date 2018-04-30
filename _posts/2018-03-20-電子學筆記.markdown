@@ -89,7 +89,8 @@ BJT也要算喔，但是太累了，直接講結論：
 $G_m = gm$  
 $R_o = r_{o2} \Vert r_{o4}$  
 $A_d = g_m(r_{o2} \Vert r_{o4})$  
-跟MOS一模一樣。
+跟MOS一模一樣。  
+
 但對於common mode來說，
 $R_{id} = 2r_{\pi}$ => MOS是無限大輸入阻抗，BJT不優  
 $A_{cm} \approx -\frac {r_{o4}}{\beta_{3}R_{EE}}$  
