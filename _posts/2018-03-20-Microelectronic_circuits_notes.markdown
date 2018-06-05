@@ -16,19 +16,36 @@ category:  note
 
 在學電子學一時，我們所用的設計想法都是以離散電路出發，也就是把各個元件放在麵包板上連接的概念。然而這章開始，我們需要改用積體電路的想法來設計電路。
 
+![Difference between Discrete Circuits and Integrated Circuits](https://i.imgur.com/GDRGUrh.png)
+> http://www.elprocus.com/elprocus-staging/difference-between-discrete-circuits-integrated-circuits/
+
 積體電路與離散電路有何差別呢？在晶圓上中製造一個大電阻的成本及空間使用很高，反而製造(在矽晶上摻雜)一個電晶體的成本已經很小很小很小，且空間也只占用幾奈米。
 
 為了製造一個放大倍數大一點的放大器，必須有一個大電阻當負載。然而製造大電阻除了上述成本&空間問題，電阻太大也會使直流DC偏壓點跑掉，會讓人頭很痛。所以我們突發奇想，剛好可以用電晶體在AC下會出現的 ${r_o}$ (爾利效應，only AC電阻很大)來取代大電阻，這樣也就不會影響到DC偏壓點，一舉兩得。
+![active load](https://i.imgur.com/sOyxWuG.png)
 
 雖然這招順利的讓負載電阻變大，但如果這個放大器本身的輸出阻抗($R_{out}$)比負載電阻小很多，兩個一大一小並聯下去，還是會得到小的電阻，怎麼辦呢？
 
 如果我們單純想辦法放大放大器內部的$R_{out}$，可能會使電流($i_{sh}$)變小，放大倍率還是變小，得不償失，所以我們又把腦筋動到電晶體上，我們在原本的CS放大器上再接一個CG結構的電晶體(這招叫做cascode)，它的效果是current buffer，他不放大信號，但能把電流百分之百從input端拉到output端，同時他自己也有個AC電阻很大的$r_o$，剛好可以把$R_{out}$放大，又是一舉兩得。
+![cascode](https://i.imgur.com/aie07zZ.png)
 
-了解完AC信號放大的部分，我們還得知道DC偏壓要怎麼弄到適當的偏壓點，因此開始介紹current mirror結構。current mirror的目標是希望做出一個理想電流源，也就是一個圈圈中間一個箭頭的那個東西，但其實理想電流源的小${r_o}$是無限大，但current mirror不是，因此我們首先介紹 cascade current mirror 結構，讓${R_o}$增大。另外，BJT的β值不夠大時，參考電流 $I_{ref}$ 跟輸出電流 $I_o$ 的比例並不好拿捏(通常電晶體的β值是一個range，沒有確定值)，我們希望降低β值對輸出電流的影響，於是在BJT的current mirror中多加一個BJT，作為base current compensation的效果。
+了解完AC信號放大的部分，我們還得知道DC偏壓要怎麼弄到適當的偏壓點，因此開始介紹current mirror結構。
+![current mirror](https://i.imgur.com/jLYOlKZ.png)
 
-再來，我們希望剛剛講的這兩件事(讓$R_o$增大、降低β值的影響)可以實現在同一個 current mirror 結構中，於是我們介紹Wilson current mirror結構，他雖然$R_o$會比 cascode current mirror 小二分之一(影響還好)，但β值的影響也一樣地有被降低。不過Wilson current mirror結構用在MOS就效果沒那麼顯著，因為MOS不會有β值的問題要解決，$R_o$也跟原本cascode的時候一樣，反而因為一邊有接兩個電晶體，一邊只有一個，會讓兩邊$V_{DS}$不同，所以我們又把第四顆電晶體放回去，結果這樣就跟原本cascode有87%像了。
+current mirror的目標是希望做出一個理想電流源，也就是一個圈圈中間一個箭頭的那個東西，但其實理想電流源的小${r_o}$是無限大，但current mirror不是，因此我們首先介紹 cascade current mirror 結構，讓${R_o}$增大。
+![cascade current mirror](https://i.imgur.com/ihn3zrY.png)
+
+另外，BJT的β值不夠大時，參考電流 $I_{ref}$ 跟輸出電流 $I_o$ 的比例並不好拿捏(通常電晶體的β值是一個range，沒有確定值)，我們希望降低β值對輸出電流的影響，於是在BJT的current mirror中多加一個BJT，作為base current compensation的效果。
+![base current compensation](https://i.imgur.com/KcpJ9f7.png)
+
+再來，我們希望剛剛講的這兩件事(讓$R_o$增大、降低β值的影響)可以實現在同一個 current mirror 結構中，於是我們介紹Wilson current mirror結構，他雖然$R_o$會比 cascode current mirror 小二分之一(影響還好)，但β值的影響也一樣地有被降低。
+![Wilson current mirror](https://i.imgur.com/2NUjljL.png)
+
+不過Wilson current mirror結構用在MOS就效果沒那麼顯著，因為MOS不會有β值的問題要解決，$R_o$也跟原本cascode的時候一樣，反而因為一邊有接兩個電晶體，一邊只有一個，會讓兩邊$V_{DS}$不同，所以我們又把第四顆電晶體放回去，結果這樣就跟原本cascode有87%像了。
+![Wilson current mirror - MOS](https://i.imgur.com/da7AB7x.png)
 
 最後，我們介紹Widlar current source結構，為了輸出一個大小是比參考電流 $I_{ref}$ 小很多倍的電流(可能百分之一)，但我們不可能做到兩顆電晶體channel的長度差是100倍，那樣太浪費空間。於是我們在current mirror的右下角多加一個電阻$R_E$，這樣 $I_{ref}$ 跟 $I_o$ 的比例便能由$R_E$來決定了，雖然$R_E$也不小就是，但設計IC就是不斷的compromise啊。
+![Widlar current source](https://i.imgur.com/KQ1WaP5.png)
 
 ### Ch8: Differential and multistage amplifiers (8.1 - 8.6.1) 
 
@@ -40,18 +57,35 @@ category:  note
 ![DA](https://i.imgur.com/C08yfuX.png)
 
 
-但實際上的運作方法當然不只這樣，差動放大器的基本結構是把兩個CS放大器的接地端接到同一個電流源上，也就是說，各自兩個放大器通過的總電流是固定的，如此一來，如果放大器A拿了很多電流，放大器B就只能拿少少的電流，反之亦然。那麼可以想像一下，如果兩個放大器的輸入訊號完全相同，那麼他們各自的通過電流也會一模一樣，因為完全是對稱的，剛好每個放大器分到總電流的二分之一，剛好在這個情況底下，訊號的增益是小的，而如果兩個放大器的輸入訊號差異較大，訊號的增益會是大的。而我們其實可以把兩個不同輸入信號的組合，拆分成同樣共有的輸入(稱為common mode)，跟他們的信號差值(differential)，common mode其實就是這兩個信號的平均值，differential就是扣掉平均值之後剩下的東西。因為電路是一個線性系統，所以我們乾脆就把common mode跟differential分開兩次討論，計算之後再把結果加起來就好啦，這樣的效果會是一模一樣的(根據疊加原理)。所以囉，common mode因為是完全一樣的訊號，訊號的增益會很小(理想上是零)，反之differential的增益就很大，如此一來就完全達到我們想要得到的效果了，真的很棒吧。
+但實際上的運作方法當然不只這樣，差動放大器的基本結構是把兩個CS放大器的接地端接到同一個電流源上，也就是說，各自兩個放大器通過的總電流是固定的，如此一來，如果放大器A拿了很多電流，放大器B就只能拿少少的電流，反之亦然。
+![DA plot](https://i.imgur.com/MfffzGU.png)
+
+那麼可以想像一下，如果兩個放大器的輸入訊號完全相同，那麼他們各自的通過電流也會一模一樣，因為完全是對稱的，剛好每個放大器分到總電流的二分之一，剛好在這個情況底下，訊號的增益是小的，而如果兩個放大器的輸入訊號差異較大，訊號的增益會是大的。而我們其實可以把兩個不同輸入信號的組合，拆分成同樣共有的輸入(稱為common mode)，跟他們的信號差值(differential)，common mode其實就是這兩個信號的平均值，differential就是扣掉平均值之後剩下的東西。因為電路是一個線性系統，所以我們乾脆就把common mode跟differential分開兩次討論，計算之後再把結果加起來就好啦，這樣的效果會是一模一樣的(根據疊加原理)。所以囉，common mode因為是完全一樣的訊號，訊號的增益會很小(理想上是零)，反之differential的增益就很大，如此一來就完全達到我們想要得到的效果了，真的很棒吧。
+![common mode + differential](https://i.imgur.com/qQkpy2t.png)
 
 為了清楚了解common mode信號跟differential信號各自被放大的比例差異，我們定義了一個東西叫做CMRR(Common-mode rejection ratio)，他就等於differential信號的增益除以common mode信號的增益(
-$CMRR = |\frac{A_d}{A_{cm}}|$)，CMRR在理想上是無限大，因為${A_{cm}}$是$0$，但實際上當然不可能這麼好，為什麼呢? 因為剛剛都是假設兩個放大器完全一模一樣的時候，common mode信號輸入才能完全被放大一模一樣的倍率，在output端common mode的輸出才會兩端無電位差，因此${A_{cm}}$等於零。然而實際上在製造積體電路時，兩個放大器還是不太可能完全一樣，一定有一些極細微的差異(稱為mismatch)。這些差異(mismatch)分為兩種，第一種是兩個放大器的負載電阻值不一樣，我們先假設一邊是$R_D$一邊是$R_D+\Delta R_D$好了(通常$\Delta R_D$會在$R_D$的$\frac{1}{100}$以內)，對於common mode信號來說，common mode信號的增益是 $A_{cm} \approx \frac{R_D}{2R_{SS}}(\frac{\Delta R_D}{R_D})$，這個值原本應該要是零的，而這對於CMRR的影響會使$CMRR = |\frac{A_d}{A_{cm}}| = |\frac{2g_mR_{SS}}{\Delta R_D/R_D}|$，因此CMRR就不再是無限大了。不過對於differential信號來說，這樣的mismatch對它影響還好喔，它兩邊輸出的電壓差會是$v_{od}=g_mR_D(1+\frac{\Delta R_D}{2R_D})v_{id}$，因為旁邊有一個大的1，而誤差項不到百分之一，所以通常可以忽略。第二種mismatch是電晶體的mismatch，也就是電晶體的$g_m$不一樣，我們先假設$g_{m1} = g_m + \frac{\Delta g_m}{2}$，$g_{m2} = g_m - \frac{\Delta g_m}{2}$，那麼這樣一算下來，$A_{cm} \approx \frac{R_D}{2R_{SS}}(\frac{\Delta g_m}{g_m})$(跟剛剛長得很像吧)，而$CMRR = |\frac{A_d}{A_{cm}}| = |\frac{2g_mR_{SS}}{\Delta g_m/g_m}|$(也是把剛剛的$R_D$換成$g_m$而已)。
+$CMRR = |\frac{A_d}{A_{cm}}|$)，CMRR在理想上是無限大，因為${A_{cm}}$是$0$，但實際上當然不可能這麼好，為什麼呢? 因為剛剛都是假設兩個放大器完全一模一樣的時候，common mode信號輸入才能完全被放大一模一樣的倍率，在output端common mode的輸出才會兩端無電位差，因此${A_{cm}}$等於零。然而實際上在製造積體電路時，兩個放大器還是不太可能完全一樣，一定有一些極細微的差異(稱為mismatch)。這些差異(mismatch)分為兩種，第一種是兩個放大器的負載電阻值不一樣，我們先假設一邊是$R_D$一邊是$R_D+\Delta R_D$好了(通常$\Delta R_D$會在$R_D$的$\frac{1}{100}$以內)，對於common mode信號來說，common mode信號的增益是 $A_{cm} \approx \frac{R_D}{2R_{SS}}(\frac{\Delta R_D}{R_D})$，這個值原本應該要是零的，而這對於CMRR的影響會使$CMRR = |\frac{A_d}{A_{cm}}| = |\frac{2g_mR_{SS}}{\Delta R_D/R_D}|$，因此CMRR就不再是無限大了。
+![R_D mismatch](https://i.imgur.com/7kpr989.png)
+
+不過對於differential信號來說，這樣的mismatch對它影響還好喔，它兩邊輸出的電壓差會是$v_{od}=g_mR_D(1+\frac{\Delta R_D}{2R_D})v_{id}$，因為旁邊有一個大的1，而誤差項不到百分之一，所以通常可以忽略。  
+
+第二種mismatch是電晶體的mismatch，也就是電晶體的$g_m$不一樣，我們先假設$g_{m1} = g_m + \frac{\Delta g_m}{2}$，$g_{m2} = g_m - \frac{\Delta g_m}{2}$，那麼這樣一算下來，$A_{cm} \approx \frac{R_D}{2R_{SS}}(\frac{\Delta g_m}{g_m})$(跟剛剛長得很像吧)，而$CMRR = |\frac{A_d}{A_{cm}}| = |\frac{2g_mR_{SS}}{\Delta g_m/g_m}|$
+(也是把剛剛的$R_D$換成$g_m$而已)。
 
 剛剛忘記先說，以上講的狀況都是MOS，如果是BJT，原則上是87%像，但還是有一些不一樣喔。哪裡不一樣咧? 首先因為BJT的Collector端電流只有Emitter端的$\alpha$倍，因此在輸入信號兩邊都是DC的$V_{CM}$時，輸出信號$v_{c1} = V_{CC} - \alpha IR_C$，會跟MOS差一個$\alpha$。
+
+![BJT](https://i.imgur.com/ZmHFdKr.png)
+
 再來，來看一下當輸入信號兩邊也還是DC，但是是差信號的話會怎樣。因為BJT的大信號電流公式是exponential的(MOS是二次式)，變化比較劇烈，我們算出來$i_{E1}=\dfrac {I}{1+e^{-v_{id}/V_{T}}}$，而另一顆BJT的Emitter電流則對稱$i_{E2}=\dfrac {I}{1+e^{v_{id}/V_{T}}}$，我們把這兩個公式畫在圖上，橫軸放$\dfrac {v_{id}}{V_{T}}$，縱軸放$\dfrac {i_{E}}{I}$，我們注意到，當$\dfrac {v_{id}}{V_{T}} = 0$時，兩顆BTJ剛好一人分到一半電流I，而在$\dfrac {v_{id}}{V_{T}} = \pm 4$時，就已經讓其中一顆BJT拿到全部電流，另一顆幾乎沒電流，因此畫出來的曲線在0附近變化很陡峭，比MOS陡峭很多(因為BJT公式是exponential，MOS是二次式)，也就是當我們輸入小信號時，會有很大的增益啦。不過這個小信號要控制在$\dfrac {V_{T}}{2}$以下喔，不然會跑出這條陡峭曲線的線性範圍，於是就失真了。
+
+![Large signals](https://i.imgur.com/vovqieO.png)
 
 接下來我們就真的來看看小信號輸入會變怎樣，我們將剛剛那個很醜的exponential公式做近似(因為${v_{id}}$很小)，結果得到：$i_{C1} = \dfrac {\alpha I}{2} - \dfrac {\alpha I}{2V_T}\dfrac {v_{id}}{2}$
 ，其實這就跟MOS的公式87%像：$i_{D1} = \dfrac {I}{2} - \dfrac {I}{V_{OV}}\dfrac {v_{id}}{2}$，可以看到BJT除了比MOS乘上$\alpha$倍以外，等於是用了$V_T$去取代$V_{OV}/2$。而如果不看共有的電流，只看增加的電流(也就是小信號)，得到$i_{c} = \dfrac {\alpha I}{2V_T}\dfrac {v_{id}}{2}$，剛好$g_m = I_C/V_T$，因此$i_{c} = g_m\dfrac {v_{id}}{2}$。
 
 其實我們還有一個更有用的看法，先假設$R_{EE} \gg r_e$，因此$v_{id}$就是跨在$2r_e$上，因此$i_c = \alpha i_e = \frac{\alpha v_{id}}{2r_e}$，其中$r_e = V_T/I_E = \frac{V_T}{I/2}$，可得$i_c = \alpha i_e = \frac{\alpha v_{id}}{2r_e} = g_m \frac{v_{id}}{2}$，是不是跟剛剛一模一樣呢?
+
+![small signals](https://i.imgur.com/A1my9u6.png)
 
 剛剛導出的這個結果，在我們加上Degenerator電阻時非常好用，因為就只是把$r_e$變成$r_e+R_E$，所以$i_{e} = \dfrac {v_{id}}{2r_e+2R_e}$。
 

@@ -38,4 +38,7 @@ Applications:
 [Distributed Representations of Words and Phrases and their Compositionality](http://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf)  
 [Efficient Estimation of Word Representations in Vector Space](http://arxiv.org/pdf/1301.3781.pdf)  
 
+在使用word2vec之前，人們用WordNet來建立word之間的關係，缺點：one-hot coding，無法表現字與字之間的關聯性。
+
+而現在要為每一個word找一個representation(vector)，來真正代表那個word，使用的方法是distributional similarity，也就是跟據此word在字句中出現的上下文關係，
 待補...
