@@ -104,6 +104,7 @@ $CMRR = |\frac{A_d}{A_{cm}}|$)，CMRR在理想上是無限大，因為${A_{cm}}$
 其實BJT還有一項東西也會mismatch，不過前面都沒提到，也就是 $ \beta$，但 $ \beta$所影響的是電流喔，他的mismatch會造成差動放大器兩邊的偏壓電流不一樣大，跟input offset voltage一樣，我們用input offset current來看待他，我們算出input offset current$I_{OS}=I_B(\frac{\Delta \beta}{\beta})$
 
 再來，其實我們放大器最後一級的output很多都是需要單端對地的輸出，因此這時候我們就只能用到differential amp的其中一端直接接出來當output了，不過這樣另外半邊的放大就沒有用了，真的很虧，聰明的工程師想到一招，我們把放大器沒用到的那一邊的電流，透過current mirror，等效地換個方向直接灌到要輸出的那一邊，對於common mode信號來說，因為灌進去的電流跟原本就存在的電流是同方向同大小的，如果匹配的話，就不會有任何電流輸出到下一級電路了；對於differential信號來說，因為灌進去的電流跟原本就存在的電流是相反方向同大小的，所以加起來就變成兩倍了，原本另外半邊用不到的電流就可以被利用乾淨了，很聰明吧。
+![single ended](https://i.imgur.com/rajeRZN.png)
 
 這種結構我們稱之為Active Load differential amp，現在我們又重新算一次$G_m$和$R_o$了，不過不緊張，算出來$G_m = g_m$，$R_o = r_{o2} \Vert r_{o4}$，結果非常直觀，因此$A_d = g_m(r_{o2} \Vert r_{o4})$。
 
@@ -129,19 +130,16 @@ $A_d = g_m(r_{o2} \Vert r_{o4})$
 $R_{id} = 2r_{\pi}$ => MOS是無限大輸入阻抗，BJT不優  
 $A_{cm} \approx -\frac {r_{o4}}{\beta_{3}R_{EE}}$  
 $CMRR = \frac{1}{2} (\beta_{3}g_mR_{EE})$  
-BJT的CMRR不是無限大的原因是$\beta$ 不是無限大，回憶一下MOS的CMRR不是無限大的原因則是因為$r_o$不是無限大，注意只要$R_{EE}$(BJT的)或是$R_{SS}$(MOS的)選得夠大，CMRR還是會很大的，因此我們可以使用Wilson current mirror等結構來當作偏壓的電壓源喔。
+BJT的CMRR不是無限大的原因是"$\beta$ 不是無限大"，回憶一下MOS的CMRR不是無限大的原因則是因為"$r_o$不是無限大"，注意只要$R_{EE}$(BJT的)或是$R_{SS}$(MOS的)選得夠大，CMRR還是會很大的，因此我們可以使用Wilson current mirror等結構來當作偏壓的電壓源喔。
 
-
-
-
-
-
-
-...
 
 
 ### Ch9: Frequency response (9.1 - 9.7.2) 
-待續
+
+這一章開始我們要納入頻率對電路的影響，也就是說我們前面學了那麼多，其實都是很不負責任地假裝頻率是處於midband，所以不需要考慮頻率問題。那麼頻率不再處於midband時，會產生甚麼問題咧?主要的問題就是，電路中有很多電容，有些是自己加上去的，有些是寄生的小電容，無法控制，在特定頻率以外就會看到他們所造成的效應。
+
+![midband](https://i.imgur.com/v8LQRWI.png)
+
 ### Ch10: Feedback (10.1-10.2, 10.7-10.10) 
 待續
 ### Ch12: OPAMP circuits (12.1 -12.2)  

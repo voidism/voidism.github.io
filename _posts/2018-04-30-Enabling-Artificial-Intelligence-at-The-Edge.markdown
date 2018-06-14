@@ -150,6 +150,6 @@ AI chip => 小量多樣 多功能
 
 ## Appendix:
 錘子科技2018在北京鳥巢的新品發表會   
-其中有展示跟意騰合作的AI降噪功能  
+其中有展示跟意騰的AI降噪晶片  
 影片從19:05 開始到 20:34  
 <iframe width="560" height="315" src="https://www.youtube.com/embed/65Tw9xBhHP0?rel=0&amp;start=1145" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
