@@ -1,17 +1,17 @@
 ---
 layout:     post
-title:      Some Baseline Methods for Multi Turn Response Selection
+title:      Baseline Methods for Multi-Turn Response Selection
 author:     Jexus
-tags: 		NLP Deep_learning
-subtitle:   ML 2018 Final Project Report
+tags: 		NLP Deep_learning Machine_learning
+subtitle:   NTUEE ML 2018 Spring Final Project Report
 category:  report
 ---
 Some Baseline Methods for Multi Turn Response Selection
 ===
 
 
-Machine Learning Final Project - conversations in TV shows
-====
+_Machine Learning Final Project - conversations in TV shows_
+> 此文為本學期 Machine Learning 課程的 Final Project Report
 
 ## Introduction & Motivation : 
 本次主題為電視劇對話中的台詞，給出上文(可能1句~4句不等)，在六個選項中找出正確的下文，其中上文可能是同一個人的台詞，也可能是對話。其實這個題目就是常見的"多輪對話"問題，不同於"QA問題"是單次問答，這種題目需要考慮到前後文的關係，所以更加困難。這種問題的model也是目前在generative language model 還表現不好的狀況之下，可以用大量語料庫搜索適合的response，來實現聊天機器人效果的好方法，是目前較為實際且能夠直接應用的方法。
@@ -22,10 +22,12 @@ Machine Learning Final Project - conversations in TV shows
   效果較差，很多詞都分錯，錯誤率高，約50%句子會跟中研院分的不一樣。  
       1. 分詞長度偏大，有時候會分成很怪的詞組，如`"天就亮,了"`，`"誰,要,妳愛,上無藥,可救"`。
       2. 會把人名亂切開，如`"林,明德"`，`"鍾,世民"`。
-    (在presentation時，聽到某一組使用jieba，實驗發現**跟不分詞直接一字一字斷開結果差不多**，可能就是jieba分詞不夠好的緣故，畢竟是針對大陸簡體語料所做的套件)  
+    (在presentation時，聽到某一組使用jieba，實驗發現**跟不分詞直接一字一字斷開結果差不多**，可能就是jieba分詞不夠好的緣故，畢竟是針對大陸簡體語料所做的套件)    
+
 - **[國教院中文分詞系統 NAER]** https://github.com/naernlp/Segmentor  
   _(採純統計式模型，執行速度快)_  
-  比jieba好很多，分詞較細，且人名不會被切開(可能有特別針對NER做處理)，但還是有少部分分錯的時候，有時是一個詞包到前後錯字，有些是分得太細，如：`"有,樣,學,樣"`。
+  比jieba好很多，分詞較細，且人名不會被切開(可能有特別針對NER做處理)，但還是有少部分分錯的時候，有時是一個詞包到前後錯字，有些是分得太細，如：`"有,樣,學,樣"`。  
+
 - **[中研院中文斷詞系統 CKIP]** http://ckipsvr.iis.sinica.edu.tw/  
   _(採經驗法則模型，執行速度較慢)_  
   分詞結果九成都跟國教院一樣(都正確的)，但少部分國教院分錯的，中研院也能分對，效果最好，見下面例子。
@@ -33,7 +35,7 @@ Machine Learning Final Project - conversations in TV shows
     **比較 example**   
     中研院(左) v.s. 國教院(右)    
   ![](https://i.imgur.com/ehrFqPF.png)
-  可發現國教院把`"不自量力"`分成`"不","自量力"`；`"駙馬爺"`分成`"駙馬","爺"`；`"鍾奎,幫,你"`分成`"鍾奎幫,你"`。
+  可發現國教院把`"不自量力"`分成`"不","自量力"`；`"駙馬爺","作對"`分成`"駙馬","爺作","對"`；`"鍾奎,幫,你"`分成`"鍾奎幫,你"`。
 
 ### (2)Word2vec: 
 - 使用Gensim，embedding size一開始使用1200(MLDS做seq2seq的經驗，維度盡量開大)，針對直接算sent2vec的相似度的架構來說(Model 1)，size比1200大和比1200小，效果都較差(數據見Experiment and Discussion)，1200算是最好的size。
@@ -44,10 +46,10 @@ Machine Learning Final Project - conversations in TV shows
     - min_count = 10
     - iter = 100
 
-## Model Description (At least two different models) : 
+## Model Description: 
 ### 1. **[Model 1] Sentence embedding -> cosine similarity** --- 最簡單的model  
 ![](https://i.imgur.com/tXffuJn.png)
-- **Sentence embedding** : 將一句話斷詞之後，每個詞在訓練好的word2vec模型中會有一個向量，將這些詞向量做$weight(w)=\frac{a}{a+p(w)}$的加權平均直接就當成我們的句子向量。($a$是一個常數，$p(w)$是該詞在訓練資料中出現的機率)^見[參考paper][1]^
+- **Sentence embedding** : 將一句話斷詞之後，每個詞在訓練好的word2vec模型中會有一個向量，將這些詞向量做$weight(w)=\frac{a}{a+p(w)}$的加權平均直接就當成我們的句子向量。($a$是一個常數，$p(w)$是該詞在訓練資料中出現的機率)$^{見[參考paper][1]}$
 - **Cosine similarity** : 判斷是否為該問題的答案是看兩個句子向量的相似程度，這裡是用兩個高維向量的cosine similarity當分數，選擇分數最高的選項當作答案。
 - **Model 參數細節**：$a=6\times 10^{-4}$，embedding size=1200
 - **Issue** : 
@@ -104,7 +106,7 @@ Machine Learning Final Project - conversations in TV shows
 ![](https://i.imgur.com/WuCpQW5.png)
 - **model架構**：input為一個問句+六個答句，embedding後經過兩個GRU，輸出7個100維的vector，直接concatenate成為700維的vector，最後接上兩層Dense，轉為6維後經過Softmax，得到預測結果。
 - **Improvement**：針對前述RNN架構的缺點，我們修改為End-to-end的RNN model，分成6個答句選項的output做Softmax，而非原本需要讓True case的output越大越好
-> **single-output Sigmoid v.s. multi-output Softmax**
+> **single-output Sigmoid v.s. multi-output Softmax**  
 > 原先RNN model用單一output+Sigmoid，而Sigmoid是將$[-\infty, + \infty]$都映射到$[0, 1]$之間，而且是output接近無限大的時候，Sigmoid出來才是1，結果會讓他變成output越大越好。
 > 反之Softmax是看各個output之間的比例，如果其中一個output明顯大於其他，則他Softmax出來的value就會很接近1，不需要train到讓他output趨近無限大。
 - **Training data量與Testing data量的平衡**：
@@ -124,7 +126,7 @@ Machine Learning Final Project - conversations in TV shows
 *  **不同的embedding維度:** 可以看出維度大的在使用cosine similarity後表現比較好，比較能判斷句子的相近程度。  
 
 | embedding維度 | private score | public score |
-| ------------- | ------------- | ------------ |
+| --- | --- | --- |
 | 100           | 0.33122       | 0.30039      |
 | 500           | 0.36758       | 0.36916      |
 | 1200          | 0.40869       | 0.40513      |
@@ -144,6 +146,7 @@ Machine Learning Final Project - conversations in TV shows
 我 很 好        -> 我 很 好 真的 嗎 
 真的 嗎         -> 真的 嗎
 ```
+
 |        | private score | public score |
 | ------ | ------------- | ------------ |
 | before | 0.39367       | 0.38814      |
@@ -169,9 +172,11 @@ Machine Learning Final Project - conversations in TV shows
 
 - **kaggle score**
 
+
 | public score | private score |
 | ------------ | ------------- |
 | 0.40513      | 0.40869       |
+
 
 - **結果討論：** train了半天，沒有比Model 1好多少，效果頗差，可見sent2vec直接接DNN並不是個好方法，畢竟沒有考慮字序的關係。
 
@@ -220,6 +225,7 @@ Machine Learning Final Project - conversations in TV shows
     * 由下圖可以發現embedding維度較大的在訓練過程中loss比較低，但是在準確率上是差不多的，為了訓練時間的考量，會選擇維度較低的方法來訓練。而在embedding維度1000以上的時候，訓練到一半準確率就會卡在一個很低的值，就再也升不上去了。  
     * 從Kaggle上的成績來看，兩個model其實是差不多的。  
 
+
 | MSE loss                             | Validation accuracy                  |
 | ------------------------------------ | ------------------------------------ |
 | ![](https://i.imgur.com/RQ1umyM.png) | ![](https://i.imgur.com/zp28XsB.png) |
@@ -242,8 +248,10 @@ Machine Learning Final Project - conversations in TV shows
 * **訓練過程** :  
 
 | CrossEntropy loss                    | Validation accuracy                  |
-| ------------------------------------ | ------------------------------------ |
+| --- | --- |
 | ![](https://i.imgur.com/4Mmp2Jr.png) | ![](https://i.imgur.com/MROYtUJ.png) |
+
+
 * **訓練結果** :  
 
 | train acc | validation acc |
