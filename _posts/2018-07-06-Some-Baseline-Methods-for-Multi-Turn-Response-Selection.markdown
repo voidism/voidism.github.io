@@ -3,7 +3,7 @@ layout:     post
 title:      Baseline Methods for Multi-Turn Response Selection
 author:     Jexus
 tags: 		NLP Deep_learning Machine_learning
-subtitle:   NTUEE ML 2018 Spring Final Project Report
+subtitle:   多輪對話選擇之基線作法 (ML 2018 Final Project at NTUEE)
 category:  report
 ---
 Some Baseline Methods for Multi Turn Response Selection
