@@ -13,6 +13,7 @@ category:  note
 ### Ch7: Building blocks of integrated-circuit amplifiers (7.1-7.6) 
 
 [Lecture Ch7 PDF](http://cc.ee.ntu.edu.tw/~lhlu/eecourses/Electronics2/Electronics_Ch7.pdf)
+[Backup](https://www.dropbox.com/s/964p8z0haqeiirr/Electronics_Ch7.pdf?dl=0)
 
 在學電子學一時，我們所用的設計想法都是以離散電路出發，也就是把各個元件放在麵包板上連接的概念。然而這章開始，我們需要改用積體電路的想法來設計電路。
 
@@ -26,7 +27,7 @@ category:  note
 
 雖然這招順利的讓負載電阻變大，但如果這個放大器本身的輸出阻抗($R_{out}$)比負載電阻小很多，兩個一大一小並聯下去，還是會得到小的電阻，怎麼辦呢？
 
-如果我們單純想辦法放大放大器內部的$R_{out}$，可能會使電流($i_{sh}$)變小，放大倍率還是變小，得不償失，所以我們又把腦筋動到電晶體上，我們在原本的CS放大器上再接一個CG結構的電晶體(這招叫做cascode)，它的效果是current buffer，他不放大信號，但能把電流百分之百從input端拉到output端，同時他自己也有個AC電阻很大的$r_o$，剛好可以把$R_{out}$放大，又是一舉兩得。
+如果我們單純想辦法放大放大器內部的$R_{out}$，可能會使電流($i_{sh}$)變小，放大倍率還是變小，得不償失，所以我們又把腦筋動到電晶體上，我們在原本的CS放大器上再接一個CG結構的電晶體(這招叫做cascode)，它的效果是current buffer，他不放大信號，但能把電流百分之百從input端拉到output端，因此電流不會變小，同時他自己也有個AC電阻很大的$r_o$，剛好可以把$R_{out}$放大，又是一舉兩得。
 ![cascode](https://i.imgur.com/aie07zZ.png)
 
 了解完AC信號放大的部分，我們還得知道DC偏壓要怎麼弄到適當的偏壓點，因此開始介紹current mirror結構。
@@ -50,6 +51,7 @@ current mirror的目標是希望做出一個理想電流源，也就是一個圈
 ### Ch8: Differential and multistage amplifiers (8.1 - 8.6.1) 
 
 [Lecture Ch8 PDF](http://cc.ee.ntu.edu.tw/~lhlu/eecourses/Electronics2/Electronics_Ch8.pdf)
+[Backup](https://www.dropbox.com/s/xsf4n4uei9y5ego/Electronics_Ch8.pdf?dl=0)
 
 這節開始我們要介紹差動放大器，也就是把前面所介紹的放大器，兩個一對的接在一起。這樣接有甚麼好處呢？因為實際上電路在工作的時候，必定會產生許許多多的雜訊，這樣直接放大訊號的話，連雜訊也一起被放大了，頭會很痛。如果訊號是由兩條電線所傳輸，用他們兩條線電位之間的差值來傳遞真正的訊號，這樣的話就算有雜訊，也是兩條都有(因為兩條電路靠得很近)，經過相減之後，雜訊就不見了，有沒有好棒棒啊。
 
@@ -136,9 +138,24 @@ BJT的CMRR不是無限大的原因是"$\beta$ 不是無限大"，回憶一下MOS
 
 ### Ch9: Frequency response (9.1 - 9.7.2) 
 
+[Lecture Ch9 PDF](http://cc.ee.ntu.edu.tw/~lhlu/eecourses/Electronics2/Electronics_Ch9.pdf)
+[Backup](https://www.dropbox.com/s/zf7bewethi8ex3y/Electronics_Ch9.pdf?dl=0)
+
 這一章開始我們要納入頻率對電路的影響，也就是說我們前面學了那麼多，其實都是很不負責任地假裝頻率是處於midband，所以不需要考慮頻率問題。那麼頻率不再處於midband時，會產生甚麼問題咧?主要的問題就是，電路中有很多電容，有些是自己加上去的，有些是寄生的小電容，無法控制，在特定頻率以外就會看到他們所造成的效應。
 
 ![midband](https://i.imgur.com/v8LQRWI.png)
+
+首先，這些電容分成兩種：1.大的，2.小的。大的通常是人自己加上去的，像是bypass capacitors、coupling capacitors，又因為電容所造成的阻抗公式為 $\frac{1}{sC}$，所以只有在頻率低的時候，他所造成的阻抗影響才會大，不然在正常頻率或是高頻他幾乎就是短路；那小的呢？小的通常是寄生電容，藏在電晶體結構裡面，我們管不著。同理，電容所造成的阻抗公式為 $\frac{1}{sC}$，因此在一般頻率或是低頻時，他所造成的阻抗非常大，幾乎就是斷路，只有在高頻時才會把它視為一個電阻。
+
+先來看個大的電容的例子：
+
+![MC_20](https://i.imgur.com/m7P5Is0.png)
+
+圖中三個電容 $C_{C1}$、$C_{C2}$(coupling capacitor)、$C_{s}$(bypass capacitor) 都是人加上去的，如果你仔細去算這個電路的轉換函數，會得到：
+
+待續...
+
+
 
 ### Ch10: Feedback (10.1-10.2, 10.7-10.10) 
 待續

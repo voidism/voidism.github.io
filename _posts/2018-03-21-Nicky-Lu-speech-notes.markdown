@@ -86,6 +86,58 @@ category:  note
 
 ![slide_14](https://i.imgur.com/90rKmr6.jpg)
 
-- 當年回台創業，下飛機跟著200個工程師，小牛不識虎
+- 當年回台創業，台灣還沒有很好的環境，下飛機跟著200個工程師，小牛不識虎，創辦鈺創
+- 如今台灣已經有很好的環境，但也已經慢慢在吃老本
 
-待續...
+### LyfieEye
+
+鈺創做的外接式環景鏡頭，可拿來做3D室內建模地圖，還可量測距離  
+有台北萬豪酒店的demo
+
+![slide_15](https://i.imgur.com/5NmibgF.jpg)
+
+可以直接玩玩看，還蠻好玩的  
+demo網址：https://beta.benaco.com/view/fbd6bf47-10f8-4e30-8ecb-c574a2affe80
+
+介紹影片：
+<iframe width="640" height="360" src="https://www.youtube.com/embed/l2bWql4m8pU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+![slide_16](https://i.imgur.com/Hy3n81H.jpg)
+
+Oculus所使用的3D景深晶片，也是鈺創做的  
+-> vertical design method  
+(EX8037、EX8038)  
+
+另外有跟日本大學合作開發手術輔助系統，醫師在開刀房動手術時，要看liver X光片或是各種切片影像，不必用手碰、不必脫手套，運用3D景深晶片，直接用手勢來處理。  
+
+介紹影片：  
+<iframe width="640" height="360" src="https://www.youtube.com/embed/T-e9cf9xHy8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+![slide_17](https://i.imgur.com/i6aYbpw.jpg)
+
+這是Heartrate chip 心率晶片  
+
+### Ending
+
+軟硬並重，美國名校如UCB、Stanford，EECS為了整合，招生從不拆開。  
+
+未來科技發展值得關注的五個I($I^5$)：  
+
+![slide_18](https://i.imgur.com/ECYbuYc.jpg)
+
+1. Human Intelligence: 發展人類智力的探索，如電影《露西》
+2. Artificial Intelligence: ML、DL
+3. 生物細胞的Biological Intelligence: 每個Cell都可以是Robot
+4. Live Pleasure Intelligence: 回到根本，享樂最重要
+5. Society 的 Intelligence: 解決貧富差距
+
+最終達成 PI => Pervasive Intelligences
+
+### Q&A
+
+當年台大電機同屆，101位同學中，出國的有80幾位，現在50~60位回台(退休)，一直留在台灣的像是曹恆偉教授。  
+
+回台創業原因：留美國發展是錦上添花，回台灣開創是雪中送炭。  
+待在美國，影響世界的機會大，但是淘汰也快。
+
+創業要素：並非為了創業而創業，「業來了，再去創！」  
