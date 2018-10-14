@@ -285,11 +285,10 @@ ensemble之比例為：(2個Model 1預測平均 + 4個Model 2預測平均 + 3個
 另外，還有一些因素也許是我們未來可以努力的目標，在ACL 2017 的 paper --- [_Sequential Matching Network: A New Architecture for Multi-turn Response Selection in Retrieval-based Chatbots_](https://arxiv.org/abs/1612.01627) 中，還引入了**多句問句分別與答句匹配**以及**利用conv層及pooling層做feature extraction**，有特別著眼在"**多輪**"對話的特質，因為多輪對話中，有很多句上文(這次final也是，以\t分隔多句上文)，但答句可能只取決於其中一句上文，因此需要好的feature extraction方法來挑出決定性的上文(詳見reference之paper大意)。這也是目前多輪對話題目較好的解法之一，這次final原本想使用該架構，但後來因model過大，一直會crush掉，最後只好半途而廢，但這個課題非常值得日後研究。  
 
 ## Reference : 
-- [參考paper][1] _A Simple but Tough-to-Beat Baseline for Sentence Embeddings_ [ICLR --- 2017 conference paper]
-  (https://openreview.net/forum?id=SyK00v5xx)
+- [參考paper][1] _A Simple but Tough-to-Beat Baseline for Sentence Embeddings_ [[ICLR --- 2017 conference paper]](https://openreview.net/forum?id=SyK00v5xx)
 > paper大意：一個sentence to vector的簡單方法，跟word averaging有點像，但是針對每個字的出現機率做加權，其中$weight(w)=\frac{a}{a+p(w)}$，$a$在$[10^{-3},10^{-4}]$之間，最後再把所有sent vec做PCA，並且減去first conponent (類似把所有句子中相同的部分減去，也就是重複出現的詞，以凸顯句子之間的差異)。  
 
-- [參考paper][2] _Sequential Matching Network: A New Architecture for Multi-turn Response Selection in Retrieval-based Chatbots_ [ACL --- 2017 paper] (https://arxiv.org/abs/1612.01627)
+- [參考paper][2] _Sequential Matching Network: A New Architecture for Multi-turn Response Selection in Retrieval-based Chatbots_ [[ACL --- 2017 paper]](https://arxiv.org/abs/1612.01627)
   ![](https://i.imgur.com/8OzzEex.png)
 > paper大意：將每一上文$(u_1, ...,u_n)$分別在**1.剛未進入GRU前**以及**2.已通過GRU後**，做sequence之間的matching，分別得到兩個matching的矩陣，將此二矩陣透過convolution以及pooling做有效的feature extraction，轉為向量後，再通過GRU做冗餘資訊的去除或有用資訊的保留，最後得到prediction。  
 
