@@ -5,4 +5,5 @@ description: "My Curriculum Vitae"
 header-img: "img/home-bg.jpg"
 ---
 
-<iframe src="http://docs.google.com/gview?url=voidism.github.io/CV.pdf&embedded=true" style="width:800px; height:1120px;" frameborder="0"></iframe>
+<iframe src="http://docs.google.com/gview?url=https://voidism.github.io/CV.pdf&embedded=true" style="width:800px; height:1120px;" frameborder="0"></iframe>
+
