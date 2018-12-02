@@ -3,7 +3,7 @@ layout:     post
 title:      Neural Language Modeling by Jointly Learning Syntax and Lexicon
 author:     Jexus
 tags: 		NLP deep_learning
-subtitle:   ICRL 2018 paper
+subtitle:   ICLR 2018 paper
 category:  placeholder
 ---
 
