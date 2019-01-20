@@ -156,3 +156,7 @@ prose:
           element: "checkbox"
           label: "Visual Workflow Chart (Some Layouts)"
           value: "true"
+# Gems
+gems:
+  - jekyll-paginate
+paginate: 10
