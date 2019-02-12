@@ -14,9 +14,9 @@ category:  note
 
 用實例來讓大家簡單理解 "Attention is all you need" 內部細節到底做了什麼！
 
-<!-- ![attn](https://i.imgur.com/Q2Fmm5k.png) -->
+![attn](https://i.imgur.com/Q2Fmm5k.png)
 
-![attn](https://i.imgur.com/5NJyp0P.png)
+<!-- ![attn](https://i.imgur.com/5NJyp0P.png) -->
 
 ## Why we need Transformer?
 
@@ -36,7 +36,7 @@ category:  note
 
 But...這會面臨一個更大的基本問題，因為處理 sequence 應該具有平移不變性，當你一個句子從位置 A 開始出現，或是位置 B 才出現，都應該擁有一樣的意思，但因為 feed-forward network 對其每一個維度的處理都是 independent 的，當 sequence shift 一格之後，八成會吐出完全不同的 output，根本上是不可行的，所以我們必須放棄這種天真的想法。
 
-那麼，還有什麼運算方式既能夠滿足(1)(2)條件又不破壞平移不變性呢？就是最近很紅的 Attention 運算，另外又搭配了許多小 trick，才搭建成了 Transformer 的模型架構。接下來就直接讓我們看一個例子，讓你用人腦 go through 一遍 Transformer 處理文字的歷程。
+那麼，還有什麼運算方式既能夠滿足(1)(2)條件又不破壞平移不變性呢？就是近年來很常用的 Attention 運算，另外又搭配了許多小 trick，才搭建成了 Transformer 的模型架構。接下來就直接讓我們看一個例子，讓你用人腦 go through 一遍 Transformer 處理文字的歷程。
 
 ## How Transformer works?
 
@@ -50,9 +50,8 @@ But...這會面臨一個更大的基本問題，因為處理 sequence 應該具�
 那 Positional Encoding 實際上到底在做什麼？簡單說就是把這 12 支 512 維的 vectors 的每一維都疊加上一個 sine/cosine function，而每個維度所疊加的 sine/cosine function 週期是不同的。假如你是第k個位置的 vector 的偶數維($=2i$)的數值，你就加上一個  $sin(k/10000^{2i/d_{model}})$ 的小數值，假如是第k個位置的 vector 的奇數維($=2i+1$)的數值，就加上一個  $cos(k/10000^{2i/d_{model}})$ 的小數值，其中$d_{model}$是 embedding 的 vector size，如上面例子就是 512。
 
 ![Positional Encoding](http://nlp.seas.harvard.edu/images/the-annotated-transformer_49_0.png)
-> http://nlp.seas.harvard.edu/images/the-annotated-transformer_49_0.png
-
-> 其實在做 positional encoding 之前會把 word embedding vector 都除以 $\sqrt{d_{model}}$。
+> - source: http://nlp.seas.harvard.edu/images/the-annotated-transformer_49_0.png
+> - 其實在做 positional encoding 之前會把 word embedding vector 都除以 $\sqrt{d_{model}}$。
 
 ### Encoder Layer
 
@@ -82,8 +81,8 @@ V 就是 value，也就是資訊所儲存在的向量們，假如你有 12 支�
 
 在 Multi-Head Attention 裡，進入 attention 運算之前，又有一個小 trick，我們把每一個 input 都分別過 h 個linear projection，從原維度投影到$\frac{原維度}{h}$，在原始設定裡面是h=8，所以 512 維的 input 被投影成 8 個 64 維的 vector，我們對 V、Q、K 都會做一樣的操作，因此最後 V、Q、K 就會被分裂成 8組，每一組裡面分別再各自去做後續的 attention，所以會有 8 個 head 分別去做 attention，這也就是 **Multi-Head Attention** 名字的由來，這 8 組 head 做完 attention 之後會得到 8 個 64 維的 vectors，最後再 concatenate 起來過一個 Linear，又可以還原回去 12 支 512 維的 vectors了！如下圖：  
 
-<!-- ![Multi-Head Attention](https://i.imgur.com/of8FrTe.png) -->
-![Multi-Head Attention](https://i.imgur.com/HqKqkrl.png)
+![Multi-Head Attention](https://i.imgur.com/of8FrTe.png)
+<!-- ![Multi-Head Attention](https://i.imgur.com/HqKqkrl.png) -->
 
 過完 linear projection 之後要做的 attention 為最簡單的 dot-product attention，但因為有scale by $\sqrt{d_k}$，所以稱為 **Scaled Dot-Product Attention**：
 
@@ -93,12 +92,12 @@ $$Attention(Q,K,V)=softmax(\frac{QK^T}{\sqrt{d_k}})V$$
 
 過完 softmax 之後再跟原本的 V 做矩陣乘法，所得到的其實就是 weighted sum，所以最後做完出來就會得到跟 Q 數量一樣多的向量，最後把這些向量過一個共用的 linear projection 就做完了！
 
-<!-- ![Scaled Dot-Product Attention](https://i.imgur.com/ujuUnIJ.png) -->
-![Scaled Dot-Product Attention](https://i.imgur.com/9G4QPW1.png)
+![Scaled Dot-Product Attention](https://i.imgur.com/ujuUnIJ.png)
+<!-- ![Scaled Dot-Product Attention](https://i.imgur.com/9G4QPW1.png) -->
 > 過程如這張圖，但其中的 mask 是 decode 的時候才會用到的，現在先不用管他。
 
 做完這些運算之後，我們仍然得到 12 支 512 維的 vectors！！  
-而在進入下一關之前，會先做一下 [dropout](https://youtu.be/xki61j7z-30?t=4229)，最後也弄一下 residual connection，所以當 encoder layer 最初的輸入為 x 時，最後的輸出會是  
+而在進入下一關之前，會先做一下 [dropout](https://youtu.be/xki61j7z-30?t=4229)，最後也弄一下 [residual connection](https://youtu.be/_OUaad6JSbU?t=3542)，所以當 encoder layer 最初的輸入為 x 時，最後的輸出會是  
 `x + Dropout(MultiHeadAttention(LayerNorm(x)))`。
 
 
@@ -156,3 +155,8 @@ Decoder Layer 基本上跟 Encoder Layer 大同小異，但仍有幾個地方不
 以上就是整個 Transformer 的架構，但其實 "Attention is all you need" 裡面還有許多讓他達成 state-of-the-art 的 tricks，像是 warm up optimizer、label smoothing 等等，這些就日後有空再介紹了了。
 
 待續...
+
+## Reference
+
+> - [1] Attention is All You Need: https://arxiv.org/abs/1706.03762
+> - [2] The Annotated Transformer: http://nlp.seas.harvard.edu/2018/04/03/attention.html
