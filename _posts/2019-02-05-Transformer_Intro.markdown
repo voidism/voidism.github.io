@@ -152,7 +152,7 @@ Decoder Layer 基本上跟 Encoder Layer 大同小異，但仍有幾個地方不
 
 ## Other tricks
 
-以上就是整個 Transformer 的架構，但其實 "Attention is all you need" 裡面還有許多讓他達成 state-of-the-art 的 tricks，像是 warm up optimizer、label smoothing 等等，這些就日後有空再介紹了了。
+以上就是整個 Transformer 的架構，但其實 "Attention is all you need" 裡面還有許多讓他達成 state-of-the-art 的 tricks，像是 warm up optimizer、label smoothing 等等，這些就日後有空再介紹了。
 
 待續...
 
