@@ -12,7 +12,8 @@ category:  note
 <!-- 記得暑假的時候就想暸解 Transformer 架構是怎麼做的，但那時候直接讀完 [paper](https://arxiv.org/abs/1706.03762) 還是有點霧煞煞(那時根本是新手QQ)，當時網路上其他教學文又都講得含含糊糊，多半是放了下面這張圖、擷取論文內容就草草了事，如[這篇](https://blog.yoctol.com/%E5%84%AA%E6%8B%93-paper-note-ep-5-attention-is-all-you-need-89c38e006d7a
 )。不過我在這個寒假重新讀過 paper 以及跟著 Harvard 這篇[教學文](http://nlp.seas.harvard.edu/2018/04/03/attention.html)重新實作，取代成我的 CycleGAN 中主要的 seq2seq 架構後，算是重新了解了 Transformer。今天就採不同於其他教學文的方式，用實例來讓大家簡單理解 "Attention is all you need" 到底在幹嘛？ -->
 
-用實例來讓大家簡單理解 "Attention is all you need" 內部細節到底做了什麼！
+記得去年暑假的時候有大概看 Transformer 是怎麼做的，那時讀完 [paper](https://arxiv.org/abs/1706.03762) 還是有點霧煞煞，當時網路上其他教學文又都講得含含糊糊，多半是放了下面這張圖、擷取論文內容就草草了事，如[這篇](https://blog.yoctol.com/%E5%84%AA%E6%8B%93-paper-note-ep-5-attention-is-all-you-need-89c38e006d7a
+)，總覺得沒有讀通，後來就放著不管他了。不過幾個月前重新認真讀過 paper 以及後來跟著這篇[教學文](http://nlp.seas.harvard.edu/2018/04/03/attention.html)重新實作，取代成專題中主要的 seq2seq 架構後，算是重新了解了 Transformer。今天就採不同於其他教學文的方式，用實例來讓大家簡單理解 "Attention is all you need" 到底在幹嘛？
 
 ![attn](https://i.imgur.com/Q2Fmm5k.png)
 
@@ -20,7 +21,7 @@ category:  note
 
 ## Why we need Transformer?
 
-假如我今天有個句子「潮水退了就知道誰沒穿褲子」總共十二個字(假設 character level 來做)，想要做後續的機器翻譯或是任何 NLP 的 task，第一步驟我們會先把它用 embedding 的方式轉成 vector 所組成的 sequence，而這邊的 embedding 可以是簡單的 Word2vec、ELMo、BERT都行，先假設 embedding size 是 512，於是這個句子就變成 12 支 512 維的 vectors。
+假如今天有個要處理的句子：「潮水退了就知道誰沒穿褲子」總共十二個字(假設 character level 來做)，想要做後續的機器翻譯或是任何 NLP 的 task，第一步驟我們會先把它用 embedding 的方式轉成 vector 所組成的 sequence，而這邊的 embedding 可以是簡單的 Word2vec、ELMo、BERT都行，先假設 embedding size 是 512，於是這個句子就變成 12 支 512 維的 vectors。
 
 再來，通常我們會把他丟進去一個 RNN 裡面來處理，像是 LSTM、GRU。這類 RNN 會把句子裡的每個 vector 一個一個的吃進去，在吃的時候記錄下有用的東西在 hidden state 裡面，並且在每個時間點都吐出當下的 hidden state。於是原先的 12 支 512 維的 vectors 經過 RNN 的"閱讀"之後就變成了長度也是 12，但每支 vector 的維度是 hidden size的 vector sequence。
 
@@ -158,5 +159,5 @@ Decoder Layer 基本上跟 Encoder Layer 大同小異，但仍有幾個地方不
 
 ## Reference
 
-> - [1] Attention is All You Need: https://arxiv.org/abs/1706.03762
-> - [2] The Annotated Transformer: http://nlp.seas.harvard.edu/2018/04/03/attention.html
+> 1. Attention is All You Need: https://arxiv.org/abs/1706.03762
+> 2. The Annotated Transformer: http://nlp.seas.harvard.edu/2018/04/03/attention.html
