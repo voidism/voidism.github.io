@@ -12,7 +12,7 @@ category:  note
 <!-- 記得暑假的時候就想暸解 Transformer 架構是怎麼做的，但那時候直接讀完 [paper](https://arxiv.org/abs/1706.03762) 還是有點霧煞煞(那時根本是新手QQ)，當時網路上其他教學文又都講得含含糊糊，多半是放了下面這張圖、擷取論文內容就草草了事，如[這篇](https://blog.yoctol.com/%E5%84%AA%E6%8B%93-paper-note-ep-5-attention-is-all-you-need-89c38e006d7a
 )。不過我在這個寒假重新讀過 paper 以及跟著 Harvard 這篇[教學文](http://nlp.seas.harvard.edu/2018/04/03/attention.html)重新實作，取代成我的 CycleGAN 中主要的 seq2seq 架構後，算是重新了解了 Transformer。今天就採不同於其他教學文的方式，用實例來讓大家簡單理解 "Attention is all you need" 到底在幹嘛？ -->
 
-記得去年暑假的時候有大概看 Transformer 是怎麼做的，那時讀完 [paper](https://arxiv.org/abs/1706.03762) 還是有點霧煞煞，當時網路上其他教學文又都講得含含糊糊，多半是放了下面這張圖、擷取論文內容就草草了事，如[這篇](https://blog.yoctol.com/%E5%84%AA%E6%8B%93-paper-note-ep-5-attention-is-all-you-need-89c38e006d7a
+記得去年暑假的時候有大概看過 Transformer 是怎麼做的，但那時讀完 [paper](https://arxiv.org/abs/1706.03762) 還是有點霧煞煞，當時網路上其他教學文又都講得含含糊糊，多半是放了下面這張圖、擷取論文內容就草草了事，如[這篇](https://blog.yoctol.com/%E5%84%AA%E6%8B%93-paper-note-ep-5-attention-is-all-you-need-89c38e006d7a
 )，總覺得沒有讀通，後來就放著不管他了。不過幾個月前重新認真讀過 paper 以及後來跟著這篇[教學文](http://nlp.seas.harvard.edu/2018/04/03/attention.html)重新實作，取代成專題中主要的 seq2seq 架構後，算是重新了解了 Transformer。今天就採不同於其他教學文的方式，用實例來讓大家簡單理解 "Attention is all you need" 到底在幹嘛？
 
 ![attn](https://i.imgur.com/Q2Fmm5k.png)
