@@ -127,7 +127,7 @@ Decoder Layer 基本上跟 Encoder Layer 大同小異，但仍有幾個地方不
 
 1. 因為 decode 的時候不僅要看當前已生成的句子，也要看 encoder 所給的 memory，所以 Decoder Layer 把這兩件事情分開做。  
     - **Decoder Layer 的第一層**是跟 Encoder Layer 的 Multi Head Attention 一樣的東西(除了有 mask 的狀況等等會講，這裡只考慮純 decode 沒有 teacher forcing 的狀況)，吃的 input 就是從 `<bos>` token 開始的生成到一半的句子。  
-    舉例：假如你想要把「潮水退了就知道誰沒穿褲子」翻譯成 "After all, you only find out who is swimming naked when the tide goes out."，最初你的 Decoder Layer 的第一層吃的 input 就是 `<bos>` 一個字而已，因為 input 只有一個 vector ，所以 output 也只會有一個 vector，假如 model 成功的吐出 `After`，這時你再把 `<bos>`、`After` 當成句子丟進去 Decoder Layer 的第一層 input，期望 output 的兩個 vector 會是 `<bos>`、`After`、`all`，以此類推...。
+    舉例：假如你想要把「潮水退了就知道誰沒穿褲子」翻譯成 "After all, you only find out who is swimming naked when the tide goes out."，最初你的 Decoder Layer 的第一層吃的 input 就是 `<bos>` 一個字而已，因為 input 只有一個 vector ，所以 output 也只會有一個 vector，假如 model 成功的吐出 `After`，這時你再把 `<bos>`、`After` 當成句子丟進去 Decoder Layer 的第一層 input，期望 output 的兩個 vector 會是 `After`、`all`，以此類推...。
     - **Decoder Layer 的第二層**是跟 Encoder Layer 的 Multi Head Attention 一樣，但是吃的 input 不再是 Q=K=V，而是 Q 放的是目前生成到一半的句子，如上述的 `<bos>`、`After` ，K=V 放的才是encoder 所給的 memory (也就是剛剛 encoder 最後所吐出來的 12 支 512 維的 vectors)，如此一來 model 才能針對 decode 當下所需要吐出的 output 選取他需要的資訊。
     - **Decoder Layer 的第三層**就是 Encoder Layer 的 Position-wise Feed-Forward Networks 完全一樣。
 2. 因為在 training 的時候我們會偷偷用 teacher forcing，也就是 input 直接放 `<bos>`、`After`、`all`、...、`goes`、`out`、`.`，output 的目標放的是 input shift 一個位置，拿掉`<bos>`，加上`<eos>`的序列，`After`、`all`、...、`out`、`.`、`<eos>`。如下例子：
