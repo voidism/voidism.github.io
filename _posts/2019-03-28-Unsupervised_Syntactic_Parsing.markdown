@@ -7,7 +7,7 @@ subtitle:   Intergrating Tree Structure Inductive Bias into LSTMs
 category:  video
 ---
 
-My invited talk on course "Machine Learning" 2019 spring, prof. Hung-yi Lee.
+My guest lecture on course "Machine Learning" 2019 spring, prof. Hung-yi Lee.
 
 ## Outline:
 

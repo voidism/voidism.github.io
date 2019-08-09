@@ -3,7 +3,7 @@ layout:     post
 title:      Visualizing and Measuring the Geometry of BERT​
 author:     Jexus
 tags: 		NLP deep_learning slide
-subtitle:   OpenAI 2019 paper - slide
+subtitle:   2019 short paper - slide
 category:  slideshare
 ---
 

@@ -3,7 +3,7 @@ layout:     post
 title:      Multi-Source Unsupervised Domain Adaptation
 author:     Jexus
 tags: 		Computer_vision deep_learning
-subtitle:   DLCV (Deep Learning for Computer Vision) 2019 spring Final Project
+subtitle:   DLCV (Deep Learning for Computer Vision) 2019 Spring Final Project
 category:  project
 ---
 
