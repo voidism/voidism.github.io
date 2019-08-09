@@ -24,5 +24,10 @@ https://openreview.net/forum?id=SkVhlh09tX
 
 另有 [Talk Video on ICLR 2019](https://www.facebook.com/iclr.cc/videos/2183069775115828/)，從55分附近開始。
 
+### Slide:
+
+> Please wait a minute for the embedded frame to be displayed. Reading it on a computer screen is better.
+
+
 
 <iframe src="https://onedrive.live.com/embed?cid=255C96F3631B0025&amp;resid=255C96F3631B0025%21414&amp;authkey=AOzCcnwnUdqGQqk&amp;em=2&amp;wdAr=1.7777777777777777" width="962px" height="565px" frameborder="0">這是 <a target="_blank" href="https://office.com/webapps">Office</a> 提供的內嵌 <a target="_blank" href="https://office.com">Microsoft Office</a> 簡報。</iframe>

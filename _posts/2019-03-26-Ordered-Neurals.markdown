@@ -17,6 +17,11 @@ category:  slideshare
 
 此 paper 於 ICLR 2019 獲 Best Paper Award。
 
+### Slide:
+
+> Please wait a minute for the embedded frame to be displayed. Reading it on a computer screen is better.
+
+
 
 
 <iframe src="https://onedrive.live.com/embed?cid=255C96F3631B0025&amp;resid=255C96F3631B0025%21416&amp;authkey=AOz8B3tPCtQAeh4&amp;em=2&amp;wdAr=1.7777777777777777" width="962px" height="565px" frameborder="0">這是 <a target="_blank" href="https://office.com/webapps">Office</a> 提供的內嵌 <a target="_blank" href="https://office.com">Microsoft Office</a> 簡報。</iframe>
