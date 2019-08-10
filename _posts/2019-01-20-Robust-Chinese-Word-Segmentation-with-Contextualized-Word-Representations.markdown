@@ -7,11 +7,11 @@ subtitle:   DSP 期末專題 State of the art 中文斷詞
 category:  project
 ---
 
-> 這是我 DSP 2018 Fall 數位語音處理概論課程的期末專題，報告已經放上 arXiv 可以直接看PDF檔。  
-> arXiv: https://arxiv.org/abs/1901.05816  
+> 這是我 DSP 2018 Fall 數位語音處理概論課程的期末專題，報告已經放上 arXiv 可以直接看 PDF 檔。  
+> arXiv: https://arxiv.org/abs/1901.05816  
 > 與目前檯面上常見的斷詞系統 [Jieba](https://github.com/fxsjy/jieba) (HMM-based) 及 [CKIP](http://ckipsvr.iis.sinica.edu.tw/) (rule-based) 相比，此系統已經勝過這兩者許多，因此我把較好的 model 及程式碼整理過後包成一個開源的 Library  
 > github: https://github.com/voidism/pywordseg  
->  也放到 PyPI 上面，使用pip的話只要在terminal直接輸入 `pip install pywordseg` 就可以安裝使用  
+> 也放到 PyPI 上面，使用pip的話只要在terminal直接輸入 `pip install pywordseg` 就可以安裝使用  
 > PyPI: https://pypi.org/project/pywordseg/  
 > 在第一次使用的時候會把 model 自動下載下來，需要等待約一分鐘。
 

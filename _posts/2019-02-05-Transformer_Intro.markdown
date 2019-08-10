@@ -73,7 +73,7 @@ But...這會面臨一個更大的基本問題，因為處理 sequence 應該具�
 #### Multi-Head Attention
 
 不管是什麼模型，在做 Attention 的時候，都會有三類向量：V、Q、K。  
-V 就是 value，也就是資訊所儲存在的向量們，假如你有 12 支向量，裡面有些資訊有用，有些資訊沒用，做 Attention 就會把這些向量依重要性來做加權平均，得到一個代表你需要的資訊的向量。  
+V 就是 value，也就是資訊所儲存在的向量們，假如你有 12 支向量，裡面有些資訊有用，有些資訊沒用，做 Attention 就會把這些向量依重要性來做加權平均，得到一個代表你需要的資訊的向量。  
 那麼，這些做加權平均所需要的權重是怎麼來的呢？就是由 K、Q 運算而來，Q 是 query，是當下所需要的處理的字，K
 就是每一個 value 都會有一個對應的 key，提供 Q 來做匹配找查的 vector，我們會用 K、Q 經過某些運算，像是內積，或是拿去通過一個 NN，來得到權重值。
 
@@ -88,7 +88,7 @@ V 就是 value，也就是資訊所儲存在的向量們，假如你有 12 支�
 
 $$Attention(Q,K,V)=softmax(\frac{QK^T}{\sqrt{d_k}})V$$
 
-這裡$QK^T$矩陣乘出來的一個 q×k 維的矩陣，其實就是讓每個 K 去跟每個 Q 相內積，矩陣的第 i,j 項就是第 i 個 Q vector 與第 j 個 K vector 所算出來的權重分數，要 scale by $\sqrt{d_k}$ 的原因是等一下會取 softmax，如果 embedding size($d_k$) 很大，就會有某些 K 跟 Q 相內積的值很大，這樣去取 softmax 之後太過 sharp，會造成 gradient 被壓小，因此 scale by $\sqrt{d_k}$ 會比較合理。
+這裡$QK^T$矩陣乘出來的一個 q×k 維的矩陣，其實就是讓每個 K 去跟每個 Q 相內積，矩陣的第 i,j 項就是第 i 個 Q vector 與第 j 個 K vector 所算出來的權重分數，要 scale by $\sqrt{d_k}$ 的原因是等一下會取 softmax，如果 embedding size($d_k$) 很大，就會有某些 K 跟 Q 相內積的值很大，這樣去取 softmax 之後太過 sharp，會造成 gradient 被壓小，因此 scale by $\sqrt{d_k}$ 會比較合理。
 
 過完 softmax 之後再跟原本的 V 做矩陣乘法，所得到的其實就是 weighted sum，所以最後做完出來就會得到跟 Q 數量一樣多的向量，最後把這些向量過一個共用的 linear projection 就做完了！
 
