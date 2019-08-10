@@ -25,6 +25,12 @@ https://www.kaggle.com/c/dlcv-spring-2019-final-project-1/leaderboard
 - In this work, we tried many unsupervised domain adaptation (UDA) models for multi-source dataset - DomainNet [1]. We mainly used Adversarial Discriminative Domain Adaptation (ADDA) [2] and Maximum Classifier Discrepancy (MCD) [3] for Unsupervised Domain Adaptation in this work. We also slightly adjusted ADDA training process to make it most suitable for multi-source challenge, which will be described below.
 - We also tried M$^3$SDA [1], which is designed for multi-source domain. However, the training accuracy is stuck and cannot beat single-source based methods in our experiments. 
 
+![DomainNet](http://ai.bu.edu/M3SDA/imgs/data_examples.png)
+> Data Examples from DomainNet - http://ai.bu.edu/M3SDA/
+
+
+![DataStatis](http://ai.bu.edu/M3SDA/imgs/statistics.png)
+> Data Statistics from DomainNet - http://ai.bu.edu/M3SDA/
 
 ## Fuzzy Adversarial Discriminative Domain Adaptation
 ### Method
@@ -33,9 +39,9 @@ We got the idea from ADDA [2] and do slight modification on training process. We
 
 
 - In *Stage 1*, we pretrain the feature extractor and classifier on source data using standard cross-entropy loss, until the model converges.
-![](https://i.imgur.com/d4oQTiV.png)
-- In *Stage 2*, the full model is shown in Figure 2. We initialize both the source feature extractor, $G_s$, target feature extractor, $G_t$, and classifier $F$ with the pretrained model in the first stage . 
 ![](https://i.imgur.com/7cRFLC8.png)
+- In *Stage 2*, the full model is shown in Figure 2. We initialize both the source feature extractor, $G_s$, target feature extractor, $G_t$, and classifier $F$ with the pretrained model in the first stage . 
+![](https://i.imgur.com/EtOhFhl.png)
 
 
 
@@ -158,8 +164,7 @@ Before applying our methods, we also train a baseline model with source data com
  | FADDA - Incep-ResNet-v2   |**47.1**            |**15.2**            |**19.8**          |  **63.6**|
  | ------------------------- |------------------- |------------------- |------------------- |-------------------|
 
-### Table 3: Comparison between single-source MCD, and multi-source MCD and
-  M$^3$SDA.
+### Table 3: Comparison between single-source MCD, and multi-source MCD and M$^3$SDA.
 
 we have also tried to use multiple pairs of classifier for different source domain in our MCD method, similar to M$^3$SDA (but without moment matching). However, the effect is not as expected and even can not be compared with source combined MCD method.
 

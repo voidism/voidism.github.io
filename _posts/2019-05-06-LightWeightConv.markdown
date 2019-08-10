@@ -13,9 +13,11 @@ category:  slideshare
 
 ### TL;DR
 
-把 Transformer 架構中的 Attention 部分全部換成 Convolution Layer，發現其實表現不差，且多加一些小 trick 就能贏過 Attention-based Transformer。
+把 Transformer 架構中的 self-attention 部分全部換成 Convolution Layer，發現其實表現不差，且多加一些小 trick 就能贏過 self-attention-based Transformer。
 
 此實驗結果並不是要說 Convolution Layer 很強，而是要說 Transformer 能表現這麼好，其架構中除了Attention 部分外的其他部分 (如：FFN blocks between the self-attention module) 可能才是扮演了重要的角色。
+
+然而其實，這篇在處理 Encoder 跟 Decoder 之間的連接時，還是用了 Attention，沒有全部換掉，所以拿這篇說 Attention 過譽了是有點不公平，只能說拿來說 self-attention 過譽，不過但這部分也不方便用 Convolution Layer 取代就是了。
 
 ![](https://i.imgur.com/ZH44lw9.png)
 https://openreview.net/forum?id=SkVhlh09tX
