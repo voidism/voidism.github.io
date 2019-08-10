@@ -19,7 +19,7 @@ I will share some notes or articles during my study. Thanks for reading and taki
 
 <h1>{{ member.name }}</h1>
 
-<h2>{{ member.role }}</h2>
+<h3>{{ member.role }}</h3>
 
 {% if member.github %} 
 <span class="social-share-googleplus"><a href="https://github.com/{{ member.github }}" title="Github"><img src="{{ "/img/icons/github-icon.png" | prepend: site.baseurl }}" style="height:20px">Github</a></span> 
@@ -30,10 +30,15 @@ I will share some notes or articles during my study. Thanks for reading and taki
 {% if member.url %}
 <span class="social-share-googleplus"><a href="{{ member.url }}" title="Google Plus"><img src="{{ "/img/icons/url-icon.png"| prepend: site.baseurl }}" style="height:20px">Website</a></span>
 {% endif %}
+{% if member.email %}
+<span class="social-share-googleplus"><a href="{{ member.email }}" title="E-mail"><img src="{{ "/img/icons/email-icon.jpg" | prepend: site.email }}" style="height:20px">E-mail</a></span>
+{% endif %}
 
 {% if member.bio %} 
 {{ member.bio }}
 {% endif %}
+
+E-mail: b05901033[at]ntu.edu.tw
 
 <hr>
 
