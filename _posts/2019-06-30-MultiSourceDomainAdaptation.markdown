@@ -3,7 +3,7 @@ layout:     post
 title:      Multi-Source Unsupervised Domain Adaptation
 author:     Jexus
 tags: 		Computer_vision deep_learning
-subtitle:   DLCV (Deep Learning for Computer Vision) 2019 Spring Final Project
+subtitle:   DLCV 2019 Spring Final Project - ICCV 2019 Workshop (Visual Domain Adaptation Challenge)
 category:  project
 ---
 
@@ -22,8 +22,8 @@ https://www.kaggle.com/c/dlcv-spring-2019-final-project-1/leaderboard
 
 
 ## Abstract
-- In this work, we tried many unsupervised domain adaptation (UDA) models for multi-source dataset - DomainNet [1]. We mainly used Adversarial Discriminative Domain Adaptation (ADDA) [2] and Maximum Classifier Discrepancy (MCD) [3] for Unsupervised Domain Adaptation in this work. We also slightly adjusted ADDA training process to make it most suitable for multi-source challenge, which will be described below.
-- We also tried M$^3$SDA [1], which is designed for multi-source domain. However, the training accuracy is stuck and cannot beat single-source based methods in our experiments. 
+- In this work, we tried many unsupervised domain adaptation (UDA) models for multi-source dataset - DomainNet [\[1\]](https://arxiv.org/abs/1812.01754). We mainly used Adversarial Discriminative Domain Adaptation (ADDA) [\[2\]](https://arxiv.org/abs/1702.05464) and Maximum Classifier Discrepancy (MCD) [\[3\]](https://arxiv.org/abs/1712.02560) for Unsupervised Domain Adaptation in this work. We also slightly adjusted ADDA training process to make it most suitable for multi-source challenge, which will be described below.
+- We also tried M$^3$SDA [\[1\]](https://arxiv.org/abs/1812.01754), which is designed for multi-source domain. However, the training accuracy is stuck and cannot beat single-source based methods in our experiments. 
 
 ![DomainNet](http://ai.bu.edu/M3SDA/imgs/data_examples.png)
 > Data Examples from DomainNet - http://ai.bu.edu/M3SDA/
@@ -35,7 +35,7 @@ https://www.kaggle.com/c/dlcv-spring-2019-final-project-1/leaderboard
 ## Fuzzy Adversarial Discriminative Domain Adaptation
 ### Method
 
-We got the idea from ADDA [2] and do slight modification on training process. We named this method as FADDA: 
+We got the idea from ADDA [\[2\]](https://arxiv.org/abs/1702.05464) and do slight modification on training process. We named this method as FADDA: 
 
 
 - In *Stage 1*, we pretrain the feature extractor and classifier on source data using standard cross-entropy loss, until the model converges.
@@ -89,7 +89,7 @@ Distribution matching based UDA algorithms (e.g. ADDA...)  have some problems:
 ![Comparison between distribution matching methods and MCD](https://i.imgur.com/PBVhbff.png)
 
 ### Method
-To consider the relationship between class, MCD method [3] aligns source and target features by utilizing the task-specific classifiers as a discriminator boundaries and target samples. See example in Figure 4.
+To consider the relationship between class, MCD method [\[3\]](https://arxiv.org/abs/1712.02560) aligns source and target features by utilizing the task-specific classifiers as a discriminator boundaries and target samples. See example in Figure 4.
 
 ![Example to explain how MCD works.](https://i.imgur.com/Z4h2hPj.png)
 
@@ -124,7 +124,7 @@ $$\min_{G} \mathcal{L}_{\rm adv}(X_{t})$$
 
 Model details and training setting of our experiments in listed below:
 
-- *Feature extractor*: We choose ResNet-50, ResNet-152, Inception-ResNet-v2 [4] as feature extractor $G$ in our experiments.
+- *Feature extractor*: We choose ResNet-50, ResNet-152, Inception-ResNet-v2 [\[4\]](https://arxiv.org/abs/1602.07261) as feature extractor $G$ in our experiments.
 - *Classifier*: In all experiments(FADDA and MCD), we use a simple one-layer fully-connected network as classifier $F$, which projects from feature dimension (e.g. 2048, 1536, ...) to class number (e.g. 345).
 - *Discriminator*: In FADDA, we use a simple three-layer fully-connected network as discriminator. The input size is feature dimension, hidden size is 512 in hidden layers.
 - *Optimizer*: We use SGD with learning rate $10^{-4}$, momentum 0.9, weight decay $10^{-4}$ in all modules in our experiments.
@@ -188,7 +188,7 @@ we have also tried to use multiple pairs of classifier for different source doma
 
 ## References
 
-- [1] Xingchao Peng, Qinxun Bai, Xide Xia, Zijun Huang, Kate Saenko, and Bo Wang. Moment matching for multi-source domain adaptation. arXiv preprint arXiv:1812.01754, 2018.
-- [2] Eric Tzeng, Judy Hoffman, Kate Saenko, and Trevor Darrell. Adversarial discriminative domain adaptation. 2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pages 2962–2971, 2017.
-- [3] Kuniaki Saito, Kohei Watanabe, Yoshitaka Ushiku, and Tatsuya Harada. Maximum Classifier Discrepancy for Unsupervised Domain Adaptation. In Proceedings of the IEEE Computer Society Conference on Computer Vision and Pattern Recognition, pages 3723–3732. IEEE Computer Society, dec 2018.
-- [4] Christian Szegedy, Sergey Ioffe, and Vincent Vanhoucke. Inception-v4, inception-resnet and the impact of residual connections on learning. CoRR, abs/1602.07261, 2016.
+- [\[1\] Xingchao Peng, Qinxun Bai, Xide Xia, Zijun Huang, Kate Saenko, and Bo Wang. Moment matching for multi-source domain adaptation. arXiv preprint arXiv:1812.01754, 2018.](https://arxiv.org/abs/1812.01754)
+- [\[2\] Eric Tzeng, Judy Hoffman, Kate Saenko, and Trevor Darrell. Adversarial discriminative domain adaptation. 2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pages 2962–2971, 2017.](https://arxiv.org/abs/1702.05464)
+- [\[3\] Kuniaki Saito, Kohei Watanabe, Yoshitaka Ushiku, and Tatsuya Harada. Maximum Classifier Discrepancy for Unsupervised Domain Adaptation. In Proceedings of the IEEE Computer Society Conference on Computer Vision and Pattern Recognition, pages 3723–3732. IEEE Computer Society, dec 2018.](https://arxiv.org/abs/1712.02560)
+- [\[4\] Christian Szegedy, Sergey Ioffe, and Vincent Vanhoucke. Inception-v4, inception-resnet and the impact of residual connections on learning. CoRR, abs/1602.07261, 2016.](https://arxiv.org/abs/1602.07261)

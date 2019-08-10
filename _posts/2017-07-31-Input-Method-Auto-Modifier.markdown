@@ -4,7 +4,7 @@ title:      Input Method Auto Modifier Between Chinese and English
 author:     Jexus
 tags: 		Input_Method
 subtitle:   自動切換中英文輸入法程式
-category:  docs
+category:  project
 ---
 >寫這篇的時候我還沒有這個部落格，當時文章放在 https://hackmd.io/s/Sy4AZViU-
 
