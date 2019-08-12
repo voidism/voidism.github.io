@@ -33,3 +33,5 @@ https://www.zhihu.com/question/323190069
 ![](https://i.imgur.com/ukqfwtQ.png)
 
 很可能是前人實驗 report 了較低的分數造成。
+
+更新：我的完整講解可至 https://youtu.be/YIuBHB9Ejok 觀看。
