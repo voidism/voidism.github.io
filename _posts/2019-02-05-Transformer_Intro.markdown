@@ -58,7 +58,7 @@ But...這會面臨一個更大的基本問題，因為處理 sequence 應該具�
 接下來進入主菜，經過 positional encoding 之後，我們仍然要處理 12 支 512 維的 vectors，這時第一步先做 Multi-Head Attention，接著做 Position-wise Feed-Forward Networks。
 在進入 Multi-Head Attention 之前會先做一個 Layer Normalization，不知道 Layer Normalization 的可以看這個 BatchNorm 與 LayerNorm 的比較([source](https://zhuanlan.zhihu.com/p/38040024))：
 
-| LayerNorm | BatchNorm |
+| BatchNorm | LayerNorm |
 | -------- | -------- |
 | input $x$ (N x D) | input $x$ (N x D) |
 | **Compute $\mu, \sigma$ of layer**|**Compute $\mu, \sigma$ of batch**|
