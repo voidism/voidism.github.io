@@ -3,7 +3,7 @@ layout:     post
 title:      RoBERTa - A Robustly Optimized BERT Pretraining Approach
 author:     Jexus
 tags: 		NLP deep_learning slide
-subtitle:   2019 paper (inhanced BERT, beating XLNet) - slide
+subtitle:   2019 paper (enhanced BERT, beating XLNet) - slide
 category:  slideshare
 ---
 
