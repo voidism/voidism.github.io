@@ -4,7 +4,10 @@ title: "About"
 description: "Who am I?"
 header-img: "img/home-bg.jpg"
 ---
+
+
 <!--
+<meta http-equiv="refresh" content="0;url='https://voidism.github.io/home'">
 ![Jexus](../img/Jexus.jpg)# Yung-Sung Chuang  
 Undergraduate Student / Electrical Engineering
 
