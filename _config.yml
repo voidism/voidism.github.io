@@ -159,4 +159,6 @@ prose:
 # Gems
 gems:
   - jekyll-paginate
+  - jekyll-redirect-from
+
 paginate: 10
