@@ -13,6 +13,8 @@ category:  note
 - Prof. [Song Han, Massachusetts Institute of Technology (MIT)](https://songhan.mit.edu/)
 - 2019-01-09 2:00pm-3:00pm
 
+![](https://i.imgur.com/53Jx9bH.png)
+
 這筆記很早已前就做了（今天是2019/12/03），現在才想到要放。當天演講很深刻的一點是，講者想要表達，過去我們做電路 IC design，只要寫 RTL code 定義好功能，接下來使用 EDA tools 來優化就好，這樣的分工體系十分有效率。這樣的流程，未來將重現在 Deep Learning 領域，到時候可能只需要定義好 Network 功能大架構及 training data，剩下的交給 AutoML、NAS 生出 network，並且再透過pruning、quantization等優化到晶片上，又小又快，不用再透過大量人工調參達成目的。
 
 ## 前言
@@ -70,3 +72,5 @@ category:  note
 - 設計電路參數，現在用seq2seq做，讀了一個電路，輸出個個電晶體所需的W(channel width)、L(channel length)、R(resistor)、C(capacitor)，不再需要人來設計電路，而是由機器來調參，這次是電路的參數，以後就不用靠人IC design惹。
 
 - Design automation for neural networks
+
+![](https://i.imgur.com/IUZ0oBt.png)
