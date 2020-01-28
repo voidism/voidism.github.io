@@ -22,10 +22,10 @@ Because I wondered whether positional "embedding" learned physical meaning or it
 
 ## Regression
 
-I train a linear regression model with the input = vector from positional embedding, output = scaler according to the position
+I trained a linear regression model with the input = vector from positional embedding, output = scaler according to the position.
 
 ### BERT
-`bert-base-cased` is used. The model is trained for 10000 epochs.
+`bert-base-cased` is used. The model was trained for 10000 epochs.
 
 The training set is the vectors with even position, that is, `[2*x for x in range(position_size//2)]`.
 
@@ -34,7 +34,7 @@ The result of the regression model that tested on all even/odd position shows th
 > X: the position of the input vector  
 > Y: predicted scaler for input
 
-I also train a model with the training set equal to the whole vector (even and odd), however, the result shows little change.
+I also trained a model with the training set equal to the whole vector (even and odd), however, the result shows little change.
 ![](https://i.imgur.com/8r40guu.png)
 > X: the position of the input vector  
 > Y: predicted scaler for input
