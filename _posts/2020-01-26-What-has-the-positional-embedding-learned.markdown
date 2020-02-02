@@ -9,7 +9,7 @@ category:  notes
 
 # What has the positional "embedding" learned?
 
-After the powerful Transformer models have become standard equipment for NLP tasks, the usage of positional embedding/encoding has also been taken for granted in front of these models as a standard component to capture positional information. In the original encoder-decoder Transformer model for machine translation [(Vaswani et al. 2017)](https://arxiv.org/abs/1706.03762), the positional "encoding" uses sinusoidal waves to fill the positional "encoding" weight matrix. It somehow makes sense to present position information in sin/cos waves, as different frequencies are used in different dimensions, as shown in the figure.
+In recent years, the powerful Transformer models have become standard equipment for NLP tasks, the usage of positional embedding/encoding has also been taken for granted in front of these models as a standard component to capture positional information. In the original encoder-decoder Transformer model for machine translation [(Vaswani et al. 2017)](https://arxiv.org/abs/1706.03762), the positional "encoding" uses sinusoidal waves to fill the positional "encoding" weight matrix. It somehow makes sense to present position information in sin/cos waves, as different frequencies are used in different dimensions, as shown in the figure.
 
 ![Positional Encoding](http://nlp.seas.harvard.edu/images/the-annotated-transformer_49_0.png)
 > source: http://nlp.seas.harvard.edu/images/the-annotated-transformer_49_0.png
