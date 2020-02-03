@@ -9,7 +9,7 @@ category:  notes
 
 # Which layer preserves the best cross-lingual representations in multilingual-BERT?
 
-In the context of doing NLP research, variants in different languages is a non-negligible issue that does not appear in other CS research fields (e.g. Computer Vision). There are over 7000 languages in the world, while most of the NLP datasets/corpus are in English. Cross-lingual transfering from English to other languages is desirable especially for the languages with fewer training data.
+In the context of NLP research, variants in different languages is a non-negligible issue that does not appear in other DL research fields (e.g. Computer Vision). There are over 7000 languages in the world, while most of the NLP datasets/corpus are in English. Cross-lingual transfering from English to other languages is desirable especially for the languages with fewer training data.
 
 Before BERT appears, the main research about cross-lingual transfering focusing on aligning independent monolingual word embeddings for different languages in supervised/adversarial methods (e.g. [MUSE](https://arxiv.org/pdf/1710.04087.pdf)). However, after Google releases the Multi-lingual version of BERT (Multilingual-BERT), people surprisingly found cross-lingual transferability in BERT for many languages without any supervision or adversarial training process ([How multilingual is Multilingual BERT?](http://arxiv.org/abs/1906.01502), [Zero-shot Reading Comprehension by Cross-lingual Transfer Learning with Multi-lingual Language Representation Model](https://arxiv.org/abs/1909.09587)). 
 
