@@ -100,12 +100,11 @@ $$ROUGE_S = F_{skip2} = \frac{(1+\beta^2)P_{skip2}R_{skip2}}{R_{skip2}+\beta^2 P
 
 ## BLEU
 
-接下來講 2002 年提出的 BLEU，[BLEU: a Method for Automatic Evaluation of Machine Translation](https://www.aclweb.org/anthology/P02-1040.pdf)，BLEU的計算方法是  
-"**在機器產生的句子中的n-gram數量**"分之"**這些n-gram有跟機器產生的句子的n-gram重疊的數量**"，所以大致上的原則只跟剛剛的ROUGE-N差在分母換掉而已。
+接下來講 2002 年提出的 BLEU，[BLEU: a Method for Automatic Evaluation of Machine Translation](https://www.aclweb.org/anthology/P02-1040.pdf)，BLEU的計算方法是 "**在機器產生的句子中的n-gram數量**"分之"**這些n-gram有跟機器產生的句子的n-gram重疊的數量**"，所以大致上的原則只跟剛剛的ROUGE-N差在分母換掉而已。
 
 $$p_n = \frac{\sum _{S\in \left\{ Candidates\right\} } \sum _{gram_n\in \left\{ S\right\} } Count_{match}(gram_n)}{\sum _{S'\in \left\{ Candidates\right\} } \sum _{gram_n'\in \left\{ S'\right\} } Count(gram_n)}$$
 
-那麼BLEU的N要取多少呢？如果只取1，那答案這時機器只輸出同一個字：'the the the the the the the the'，剛好答案句子裡通常也有'the'，於是7/7就會得到1.0的分數，失去準度。如果N取太大又太嚴格，所以最後的方法就是：我全都要！也是是把N={1,2,3,4}全都算一遍，算好之後再把他們取log平均後取exponential。  
+那麼BLEU的N要取多少呢？如果只取1，那答案這時機器只輸出同一個字：'the the the the the the the'，剛好答案句子裡通常也有'the'，於是7/7就會得到1.0的分數，失去準度。如果N取太大又太嚴格，所以最後的方法就是：我全都要！也是是把N={1,2,3,4}全都算一遍，算好之後再把他們取log平均後取exponential。  
 ($w_n$通常是1/N, N=4)
 
 $$
@@ -118,6 +117,7 @@ $$
 \mathrm{BP}=\left\{\begin{array}{ll}1 & \text { if } c>r \\ e^{(1-r / c)} & \text { if } c \leq r\end{array}\right.
 $$
 
+所以只要生出來的句子比正確答案短，分數就會受到懲罰。
 於是我們算出BLEU後，最後要把分數再乘以BP:
 
 $$
