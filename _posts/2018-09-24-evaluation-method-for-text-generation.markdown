@@ -124,5 +124,7 @@ $$
 \mathrm{BLEU}=\mathrm{BP} \cdot \exp \left(\sum_{n=1}^{N} w_{n} \log p_{n}\right)
 $$
 
-## Beyond ROUGE & BLEU (後記)
+## Beyond ROUGE & BLEU (2020/03/07 update)
 除了 ROUGE & BLEU，也有一些其他的 Evaluation Metrics，像是[GLEU](https://www.aclweb.org/anthology/P07-1044/) (注重流暢度)、[METEOR](https://www.aclweb.org/anthology/W05-0909/) (多考慮同義詞也給過)，而最近的ICLR2020也出了一篇 [BERTscore](https://arxiv.org/abs/1904.09675)，是用BERT取embedding之後來計算兩句子word-by-word之間的相似度，也是個不錯而簡單的方法。
+
+![](https://github.com/Tiiiger/bert_score/raw/master/bert_score.png)
