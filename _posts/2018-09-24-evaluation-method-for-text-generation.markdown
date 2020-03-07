@@ -9,7 +9,7 @@ category:  note
 
 ![title](http://upload.art.ifeng.com/2018/0408/1523156237505.jpg)
 
-在人們做一些文字生成的task時(machine translation、text summarization)，要如何評估所生成文句的優劣呢？如果用人眼去看，當然很準，但是做一次實驗往往需要生成上萬句，無法用人眼來看。再者，如果在機器訓練過程中要人來參與的話，不知道要train到。那怎麼辦呢？人們想出了一些用機器評估的好方法，也就是BLEU和ROUGE，這兩個方法都是在很多年前就已經提出的，而且多少會覺得有點不完善，但仍然是目前最常使用的方法。
+在人們做一些文字生成的task時(machine translation、text summarization)，要如何評估所生成文句的優劣呢？如果用人眼去看，當然很準，但是做一次實驗往往需要生成上萬句，無法用人眼來看。再者，如果在每一次model train完都要人來參與評估才能決定model好壞的話，肯定會拖長實驗流程很多時間。那怎麼辦呢？人們想出了一些用機器評估的好方法，也就是BLEU和ROUGE，這兩個方法都是在很多年前就已經提出的，而且多少會覺得有點不完善，但仍然是目前最常使用的方法。
 
 先借用[這篇](https://stackoverflow.com/questions/38045290/text-summarization-evaluation-bleu-vs-rouge)講一下 BLEU 跟 ROUGE 的差異：
 
@@ -21,14 +21,14 @@ category:  note
 
 ## ROUGE
 
-先來接介紹[ROUGE(Recall-Oriented Understudy for Gisting Evaluation)](http://www.aclweb.org/anthology/W04-1013)，這篇是早在2004年提出的，作者是[Chin-Yew Lin](https://www.microsoft.com/en-us/research/people/cyl/)，是交大校友，超強。
+先來接介紹[ROUGE(Recall-Oriented Understudy for Gisting Evaluation)](http://www.aclweb.org/anthology/W04-1013)，這篇是早在2004年提出的，作者是[Chin-Yew Lin](https://www.microsoft.com/en-us/research/people/cyl/)，是交大校友。
 
 ROUGE有很多種：ROUGE-N, ROUGE-L, ROUGE-W, ROUGE-S
 
 ### ROUGE-N
 
 定義如下，非常直覺：
-"**在正確答案文章中的句子中的n-gram數量**"分之"**這些n-gram有跟機器產生的句子的n-gram重疊的數量**"  
+"**在正確答案句子中的n-gram數量**"分之"**這些n-gram有跟機器產生的句子的n-gram重疊的數量**"  
 
 $$\frac{\sum _{S\in \left\{ Reference\right\} } \sum _{gram_n\in \left\{ S\right\} } Count_{match}(gram_n)}{\sum _{S\in \left\{ Reference\right\} } \sum _{gram_n\in \left\{ S\right\} } Count(gram_n)}$$
 
@@ -82,7 +82,7 @@ $$ROUGE_L = F_{wlcs} = \frac{(1+\beta^2)P_{wlcs}R_{wlcs}}{R_{wlcs}+\beta^2 P_{wl
 
 一樣$\beta$會是一個大的值，所以還是以recall為重。
 
-## ROUGE-S
+### ROUGE-S
 ROUGE-S跟ROUGE-N還蠻像的，但很無腦的把n-gram換成skip-n-gram，例如skip-bigram的話，就是把句子中$C ^m _2$種組合都拿去當成他的bi-gram來用。
 
 $$P_{skip2} = \frac{SKIP2(X,Y)}{C(m,2)}$$
@@ -93,7 +93,36 @@ $$ROUGE_S = F_{skip2} = \frac{(1+\beta^2)P_{skip2}R_{skip2}}{R_{skip2}+\beta^2 P
 
 當然，這樣的算法會把距離很遠的假bi-gram也當成是真的，我們可以下一個constrain$d_{skip}$使當距離大於$d_{skip}$就不算數。
 
-## ROUGE-SU: ROUGE-S的加強版
+### ROUGE-SU: ROUGE-S的加強版
 如果兩個序列剛好是反序，那ROUGE-S算出來剛好就是0，因為每個skip-bigram都是反的，所以我們可以加入uni-gram的分數進去，變成ROUGE-SU，就比較有分辨性。
 
-待續...
+而實際上把 candidate 句子跟 reference 句子的句首都加上`<BOS>` token之後，再去算ROUGE-S，就可以達成我們要的效果了，(因為考慮了所有`<BOS>`-`unigram`的skip-bigram)。
+
+## BLEU
+
+接下來講 2002 年提出的 BLEU，[BLEU: a Method for Automatic Evaluation of Machine Translation](https://www.aclweb.org/anthology/P02-1040.pdf)，BLEU的計算方法是  
+"**在機器產生的句子中的n-gram數量**"分之"**這些n-gram有跟機器產生的句子的n-gram重疊的數量**"，所以大致上的原則只跟剛剛的ROUGE-N差在分母換掉而已。
+
+$$p_n = \frac{\sum _{S\in \left\{ Candidates\right\} } \sum _{gram_n\in \left\{ S\right\} } Count_{match}(gram_n)}{\sum _{S'\in \left\{ Candidates\right\} } \sum _{gram_n'\in \left\{ S'\right\} } Count(gram_n)}$$
+
+那麼BLEU的N要取多少呢？如果只取1，那答案這時機器只輸出同一個字：'the the the the the the the the'，剛好答案句子裡通常也有'the'，於是7/7就會得到1.0的分數，失去準度。如果N取太大又太嚴格，所以最後的方法就是：我全都要！也是是把N={1,2,3,4}全都算一遍，算好之後再把他們取log平均後取exponential。  
+($w_n$通常是1/N, N=4)
+
+$$
+\mathrm{BLEU}=\exp \left(\sum_{n=1}^{N} w_{n} \log p_{n}\right)
+$$
+
+但這時還有一個問題，如果機器只輸出一個短句'of the'，剛好答案句子也有'of the'，於是在N={1,2}的時候BLEU算出來都是1.0，因為短句子分母就很小，只要有賽到，很容易拿到1.0，這招實在有點賊，於是BLEU又引入了brevity penalty (BP):
+
+$$
+\mathrm{BP}=\left\{\begin{array}{ll}1 & \text { if } c>r \\ e^{(1-r / c)} & \text { if } c \leq r\end{array}\right.
+$$
+
+於是我們算出BLEU後，最後要把分數再乘以BP:
+
+$$
+\mathrm{BLEU}=\mathrm{BP} \cdot \exp \left(\sum_{n=1}^{N} w_{n} \log p_{n}\right)
+$$
+
+## Beyond ROUGE & BLEU (後記)
+除了 ROUGE & BLEU，也有一些其他的 Evaluation Metrics，像是[GLEU](https://www.aclweb.org/anthology/P07-1044/) (注重流暢度)、[METEOR](https://www.aclweb.org/anthology/W05-0909/) (多考慮同義詞也給過)，而最近的ICLR2020也出了一篇 [BERTscore](https://arxiv.org/abs/1904.09675)，是用BERT取embedding之後來計算兩句子word-by-word之間的相似度，也是個不錯而簡單的方法。
