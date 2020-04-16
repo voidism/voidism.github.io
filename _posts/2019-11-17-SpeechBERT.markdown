@@ -2,16 +2,14 @@
 layout:     post
 title:     My Work - SpeechBERT：Cross-Modal Pre-trained Language Model for End-to-end Spoken Question Answering
 author:     Jexus
-tags: 		EMNLP nlp speech_processing deep_learning
-subtitle:   Submitted to ICASSP 2020 (International Conference on Acoustics, Speech and Signal Processing)
+tags: 		nlp speech_processing deep_learning
+subtitle:   跨模度預訓練＆端到端語音問答模型
 category:  project
 ---
 
 # [SpeechBERT: Cross-Modal Pre-trained Language Model for End-to-end Spoken Question Answering](https://arxiv.org/abs/1910.11559)
 
-_Submitted to ICASSP 2020 (International Conference on Acoustics, Speech and Signal Processing)_
-
-Authors: [**Yung-Sung Chuang**](https://voidism.github.io/), [Chi-Liang Liu](https://github.com/Liangtaiwan), and [Hung-Yi Lee](http://speech.ee.ntu.edu.tw/~tlkagk/index.html)
+Authors: [**Yung-Sung Chuang (me)**](https://voidism.github.io/), [Chi-Liang Liu](https://github.com/Liangtaiwan), and [Hung-Yi Lee](http://speech.ee.ntu.edu.tw/~tlkagk/index.html)
 
 ArXiv: [https://arxiv.org/abs/1910.11559](https://arxiv.org/abs/1910.11559)  
 
