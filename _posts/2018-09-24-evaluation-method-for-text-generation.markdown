@@ -7,6 +7,7 @@ subtitle:   BLEU 及 ROUGE 的簡單介紹
 category:  note
 ---
 
+
 ![title](http://upload.art.ifeng.com/2018/0408/1523156237505.jpg)
 
 在人們做一些文字生成的task時(machine translation、text summarization)，要如何評估所生成文句的優劣呢？如果用人眼去看，當然很準，但是做一次實驗往往需要生成上萬句，無法用人眼來看。再者，如果在每一次model train完都要人來參與評估才能決定model好壞的話，肯定會拖長實驗流程很多時間。那怎麼辦呢？人們想出了一些用機器評估的好方法，也就是BLEU和ROUGE，這兩個方法都是在很多年前就已經提出的，而且多少會覺得有點不完善，但仍然是目前最常使用的方法。
