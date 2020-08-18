@@ -65,20 +65,30 @@ stands for the adversarial loss for $D$ and $\mathcal{L}_{class}$
 
 for the cross-entropy loss for $F$: 
 
+<center>
 $$ \mathcal{L}_{class} = \sum_{i, j} \sum_{k \in K, \mathbf{x}_s \in b_{i}^{S_j}} \mathbf{1}_{[k = y_s]}\log F(G_s(\mathbf{x}_{s}))$$
+</center>
+<center>
 $$ \mathcal{L}_{adv,src} = \sum_{i, j} \sum_{\mathbf{x}_s \in b_{i}^{S_j}} -\log D(G_s(\mathbf{x}_{s}))$$
+</center>
 
 - *Step 2.* Train three minibatches $b_{3i}^{T}$, $b_{3i+1}^{T}$, $b_{3i+2}^{T} \in T$ and compute $\mathcal{L}_{adv,tgt}$ for $D$, with all the other modules fixed, and only consider the gradient of $D$. We train three minibatches in this step to balance the amount of data seen in step 1.
 
+<center>
 $$ \mathcal{L}_{adv,tgt} = \sum_{j} \sum_{\mathbf{x}_t \in b^{T}_{j}} -\log (1 - D(G_t(\mathbf{x}_{t})))$$
+</center>
 
 - *Step 3.* Then we optimize $G_s$, $F$ and $D$ simultaneously after first and second step.
 
+<center>
 $$ \min_{G_s,F,D} \mathcal{L}_{class} + \mathcal{L}_{adv,src} + \mathcal{L}_{adv,tgt}$$
+</center>
 
 - *Step 4.* Lastly, optimize $G_t$ (acting like generator in standard adversarial training) using  $b_{3i}^{T}$, $b_{3i+1}^{T}$, $b_{3i+2}^{T}$ $\in T$ in order to fool $D$, with both $D$ and $F$ fixed. 
 
+<center>
 $$ \min_{G_t} -\mathcal{L}_{adv,tgt}$$
+</center>
 
 
 ## Maximum Classifier Discrepancy (MCD)
@@ -100,13 +110,19 @@ To consider the relationship between class, MCD method [\[3\]](https://arxiv.org
 - *Step1.* Train both classifiers and generator to
 classify the source samples correctly.
 
-$$\min_{G,F_1,F_2} \mathcal{L}_{class}(X_{s},Y_{s})$$ 
+<center>
+$$\min_{G,F_1,F_2} \mathcal{L}_{class}(X_{s},Y_{s})$$
+</center>
 
 - *Step2.* Fix the generator and train two classifiers (F1 and F2) to maximize the discrepancy given target features. At the same time, we still train F1, F2 to minimize classification loss, in order to keep the performance on source data.
 
+<center>
 $$\min_{F_1,F_2} \mathcal{L}(X_{s},Y_{s}) - \mathcal{L}_{\rm adv}(X_{t})$$
+</center>
 
+<center>
 $$\mathcal{L}_{\rm adv}(X_{t}) = {\mathbb{E}_{\mathbf{x_{t}}\sim X_{t}}}[d(p_1(\mathbf{y}|\mathbf{x_t}),p_2(\mathbf{y}|\mathbf{x_t}))]$$
+</center>
 
 
 ![MCD Step 2](https://i.imgur.com/WAkkhAa.png)
@@ -114,7 +130,9 @@ $$\mathcal{L}_{\rm adv}(X_{t}) = {\mathbb{E}_{\mathbf{x_{t}}\sim X_{t}}}[d(p_1(\
 
 - *Step3.* Fix the classifiers and train the generator to  minimize discrepancy between two classifiers. Step 3 is repeated for 4 times in our experiment.
 
+<center>
 $$\min_{G} \mathcal{L}_{\rm adv}(X_{t})$$
+</center>
 
 ![MCD Step 3](https://i.imgur.com/1MzgRfj.png)
 

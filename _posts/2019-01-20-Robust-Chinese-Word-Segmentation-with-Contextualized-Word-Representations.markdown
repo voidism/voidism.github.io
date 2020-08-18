@@ -55,11 +55,15 @@ There are some remained hyperparameters: 300 units for LSTM hidden size, 1024 fo
 
 Different from traditional word embedding con- cepts, in ELMo (Peters et al., 2018), word repre- sentation is a function of the sentence. That is, the vector representation of every word is not de- termined until the whole sentence is constructed, and thus each vector representation is contextu- alized. To get the contextualized representation, they use a bidirectional language models (biLM) and have it trained on large corpus.. The forward LM models the probability of token $t_k$ given the history ($t_1, ..., t_{k−1}$):
 
+<center>
 $$p(t_1, t_2, \ldots, t_N) = \prod_{k=1}^N p({t_k} \mid t_1, t_2, \ldots, t_{k-1}).$$
+</center>
 
 A backward LM runs in reverse, predicting the previous token given the future context:
 
+<center>
 $$p(t_1, t_2, \ldots, t_N) = \prod_{k=1}^N p(t_k \mid t_{k+1}, t_{k+2}, \ldots, t_N).$$
+</center>
 
 Starting from computing a context-independent token representation 
 $$x^{LM}_{k}$$
@@ -81,13 +85,19 @@ $$x^{LM}_{k}$$
   $$\overleftarrow{\mathbf{h}}^{LM}_{k,2}$$
   ) are used to predict next/previous token respectively by performing a Softmax layer with tied parameters for both directions. Finally, we jointly maximize the log likelihood of both the forward and backward directions:
 
+<center>
 $$ \sum_{k=1}^N (\log p({t_k} \mid t_1, \ldots, t_{k-1}; \Theta_x, \overrightarrow{\Theta}_{LSTM}, \Theta_s)$$
+</center>
 
+<center>
 $$ + \log p({t_k} \mid t_{k+1}, \ldots, t_{N}; \Theta_x, \overleftarrow{\Theta}_{LSTM}, \Theta_s))$$
+</center>
 
 To get the final word representation from the pretrained biLM for the downstream task, we compute:
 
+<center>
 $$\mathbf{ELMo}_k = \gamma (s_0 \mathbf{x}^{LM}_{k} + s_1 \mathbf{h}^{LM}_{k,1} + s_2 \mathbf{h}^{LM}_{k,2})$$
+</center>
 
 where $\gamma$ and $s_i$ can be adjusted when training on different downstream tasks. $\mathbf{s}_{i}$ are softmax-normalized weights and the scalar parameter $\gamma$ allows the task model to scale the entire ELMo vector. 
 

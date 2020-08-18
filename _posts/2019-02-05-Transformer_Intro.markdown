@@ -86,7 +86,9 @@ V 就是 value，也就是資訊所儲存在的向量們，假如你有 12 支�
 
 過完 linear projection 之後要做的 attention 為最簡單的 dot-product attention，但因為有scale by $\sqrt{d_k}$，所以稱為 **Scaled Dot-Product Attention**：
 
+<center>
 $$Attention(Q,K,V)=softmax(\frac{QK^T}{\sqrt{d_k}})V$$
+</center>
 
 這裡$QK^T$矩陣乘出來的一個 q×k 維的矩陣，其實就是讓每個 K 去跟每個 Q 相內積，矩陣的第 i,j 項就是第 i 個 Q vector 與第 j 個 K vector 所算出來的權重分數，要 scale by $\sqrt{d_k}$ 的原因是等一下會取 softmax，如果 embedding size($d_k$) 很大，就會有某些 K 跟 Q 相內積的值很大，這樣去取 softmax 之後太過 sharp，會造成 gradient 被壓小，因此 scale by $\sqrt{d_k}$ 會比較合理。
 

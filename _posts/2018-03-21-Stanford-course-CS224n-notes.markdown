@@ -62,48 +62,68 @@ skip-gram就是train一個NN，從中央字預測旁邊字，也就是你要在�
 
 以上聽起來很棒，但這個矩陣的最佳解是怎麼找到的呢？當然是deep一波，用gradient descent下去找，那gradient descent的目標是甚麼呢？目標是最大化下面這個函數：
 
+<center> 
 $$Likelihood = L(\theta) = \prod_{t=1}^T \prod_{-m \leq j \leq m, j \neq 0} P(w_{t+j} \vert w_t ; \theta)$$
+</center>
 
 其中m就是你的window大小，也就是說，在你window內的字，你希望他們的機率是最大(也就是等於一)。
 
 可是ML工程師都偏好最小化問題，於是我們把它取log加負號，取log之後，相乘就變成相加了，更好處理：
 
+<center> 
 $$J(\theta) = -\frac{1}{T} log(L(\theta)) = -\frac{1}{T} \sum_{t=1}^T \sum_{-m \leq j \leq m, j \neq 0} log P(w_{t+j} \vert w_t ; \theta)$$
+</center>
 
 而在這裡，$P(w_{t+j} \vert w_t ; \theta)$是如何算出的呢？這裡我們使用每個維度的output算softmax得到機率分布，也就是說：
 
+<center> 
 $$P(o \vert c ; \theta) = \frac{exp({u_o}^T v_c)}{\sum_{w=1}^V exp({u_w}^T v_c)}$$
+</center>
 
 (其中$o = w_{t+j}, c = w_t$)
 
 
 所以咧，現在就是個loss function = $J(\theta)$的最佳化問題，要gradient descent要算偏微分，於是乎：
 
+<center> 
 $$\dfrac {\partial }{\partial v_c} J(\theta) = -\frac{1}{T} \dfrac {\partial }{\partial v_c}  log(L(\theta)) = -\frac{1}{T} \sum_{t=1}^T \sum_{-m \leq j \leq m, j \neq 0} \dfrac {\partial }{\partial v_c}  log P(o \vert c ; \theta)$$
+</center>
 
 先單獨算一下$\dfrac {\partial }{\partial v_c}  log P(o \vert c ; \theta)$這個東西是甚麼：
 
+<center> 
 $$\dfrac {\partial }{\partial v_c}  log P(o \vert c ; \theta) = \dfrac {\partial }{\partial v_c}  log \frac{exp({u_o}^T v_c)}{\sum_{w=1}^V exp({u_w}^T v_c)}$$
+</center>
 
 log 相除變相減：
 
+<center> 
 $$\dfrac {\partial }{\partial v_c}  log \frac{exp({u_o}^T v_c)}{\sum_{w=1}^V exp({u_w}^T v_c)} = \dfrac {\partial }{\partial v_c} {u_o}^T v_c - \dfrac {\partial }{\partial v_c} log \sum_{w=1}^V exp({u_w}^T v_c)$$
+</center>
 
 很明顯，第一項是：$\dfrac {\partial }{\partial v_c} {u_o}^T v_c = u_o$
 
 第二項，使用chain rule：
 
+<center> 
 $$\dfrac {\partial }{\partial v_c} log \sum_{w=1}^V exp({u_w}^T v_c) = \frac{1}{\sum_{w=1}^V exp({u_w}^T v_c)} \sum_{x=1}^V exp({u_x}^T v_c)u_x$$
+</center>
 
 chain rule出來的項，我們使用新變數$x$。然後其實，前面那項可以塞進去後面，塞進去之後，就會發現它其實是在算softmax，也就是：
 
+<center> 
 $$\frac{1}{\sum_{w=1}^V exp({u_w}^T v_c)} \sum_{x=1}^V exp({u_x}^T v_c)u_x = \sum_{x=1}^V \frac{exp({u_x}^T v_c)}{\sum_{w=1}^V exp({u_w}^T v_c)} u_x$$
+</center>
 
+<center> 
 $$ = \sum_{x=1}^V softmax({u_x}^T v_c) u_x = \sum_{x=1}^V P(x \vert c) u_x$$
+</center>
 
 現在合併一二項：
 
+<center> 
 $$\dfrac {\partial }{\partial v_c} J(\theta) = u_0 - \sum_{x=1}^V P(x \vert c) u_x$$
+</center>
 
 $u_o$就是出現在附近的上下文的context embedding vector，$\sum_{x=1}^V P(x \vert c) u_x$則是所有茫茫字海中，所有人的context embedding vector機率加權平均(也就是期望值)，理想上只有$P(x \vert c)$會是1，其他都是0，所以train到理想時，$u_o = \sum_{x=1}^V P(x \vert c) u_x$，梯度接近0，合理。
 
