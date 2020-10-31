@@ -1,24 +1,26 @@
 ---
 layout:     post
-title:     My Work - SpeechBERT：Cross-Modal Pre-trained Language Model for End-to-end Spoken Question Answering
+title:     My Work - SpeechBERT：An Audio-and-text Jointly Learned Language Model for End-to-end Spoken Question Answering
 author:     Jexus
 tags: 		nlp speech_processing deep_learning
-subtitle:   跨模度預訓練＆端到端語音問答模型
+subtitle:   Interspeech 2020 conference paper
 category:  project
 ---
 
-# [SpeechBERT: Cross-Modal Pre-trained Language Model for End-to-end Spoken Question Answering](https://arxiv.org/abs/1910.11559)
+# [SpeechBERT: An Audio-and-text Jointly Learned Language Model for End-to-end Spoken Question Answering](https://arxiv.org/abs/1910.11559)
 
-Authors: [**Yung-Sung Chuang (me)**](https://voidism.github.io/), [Chi-Liang Liu](https://github.com/Liangtaiwan), and [Hung-Yi Lee](http://speech.ee.ntu.edu.tw/~tlkagk/index.html)
+> Updated in 2020/11/01 after published in Interspeech 2020
+
+Authors: [**Yung-Sung Chuang (me)**](https://voidism.github.io/), [Chi-Liang Liu](https://github.com/Liangtaiwan), [Hung-Yi Lee](http://speech.ee.ntu.edu.tw/~tlkagk/index.html), and [Lin-shan Lee](http://speech.ee.ntu.edu.tw/previous_version/lslNew.htm)
 
 ArXiv: [https://arxiv.org/abs/1910.11559](https://arxiv.org/abs/1910.11559)  
 
 ## Introduction
 
-While end-to-end models for spoken language understanding tasks have been explored recently, there is still no end-to-end model for spoken question answering (SQA) tasks, which would be catastrophically influenced by speech recognition errors. Meanwhile, pre-trained language models, such as BERT, have performed successfully in text question answering. To bring this advantage of pre-trained language models into spoken question answering, we propose SpeechBERT, a cross-modal transformer-based pre-trained language model. As the first exploration in end-to-end SQA models, our results matched the performance of conventional approaches that fed with output text from ASR and only slightly fell behind pre-trained language models, showing the potential of end-to-end SQA models.
+While various end-to-end models for spoken language understanding tasks have been explored recently, this paper is probably the first known attempt to challenge the very difficult task of end-to-end spoken question answering (SQA). Learning from the very successful BERT model for various text processing tasks, here we proposed an audio-and-text jointly learned SpeechBERT model. This model outperformed the conventional approach of cascading ASR with the following text question answering (TQA) model on datasets including ASR errors in answer spans, because the end-to-end model was shown to be able to extract information out of audio data before ASR produced errors. When ensembling the proposed end-to-end model with the cascade architecture, even better performance was achieved. In addition to the potential of end-to-end SQA, the SpeechBERT can also be considered for many other spoken language understanding tasks just as BERT for many text processing tasks.
 
 
-## Summary in Chinese
+## TL;DR in Chinese (for 1st version)
 
 以往 Spoken Question Answering (SQA) 的 dataset 都需要先把語音用 ASR 語音辨識轉成文字之後，再當成一般的文字 QA dataset，接 QA model 下去做。然而前人指出，經過 ASR 後的文字因為包含辨識錯誤，會使得 SQA 的正確率與一般純文字 QA 相比大幅的降低 (甚至20%，如下圖)。
 

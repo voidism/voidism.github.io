@@ -1,0 +1,23 @@
+---
+layout:     post
+title:     My Work - Dual Inference for Improving Language Understanding and Generation
+author:     Jexus
+tags: 		EMNLP nlp deep_learning
+subtitle:   EMNLP 2020 findings paper
+category:  abstract
+---
+
+# Dual Inference for Improving Language Understanding and Generation
+
+This is my work accepted by the EMNLP 2020 (findings paper).
+
+## TL;DR
+
+We improve the performance of NLU and NLG by leveraging the duality between NLU and NLG in inference time. Our method can improve NLU/NLG without re-training the models, considering larger and larger pre-trained models are brought to the world.
+
+
+- arXiv: https://arxiv.org/abs/2010.04246
+- github: https://github.com/MiuLab/DuaLUG
+
+## Abstract
+Natural language understanding (NLU) and Natural language generation (NLG) tasks hold a strong dual relationship, where NLU aims at predicting semantic labels based on natural language utterances and NLG does the opposite. The prior work mainly focused on exploiting the duality in model training in order to obtain the models with better performance. However, regarding the fast-growing scale of models in the current NLP area, sometimes we may have difficulty retraining whole NLU and NLG models. To better address the issue, this paper proposes to leverage the duality in the inference stage without the need of retraining. The experiments on three benchmark datasets demonstrate the effectiveness of the proposed method in both NLU and NLG, providing the great potential of practical usage.
