@@ -9,6 +9,8 @@ category:  notes
 
 # 美國 EECS 博士班申請經驗分享 (ML/DL/NLP/Speech)
 
+這篇同時也發在PTT studyabroad版: https://www.ptt.cc/bbs/studyabroad/M.1616171844.A.181.html
+
 ## 研究領域
 Machine Learning for Natural Language Processing, Speech Processing
 
